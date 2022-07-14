@@ -1,41 +1,51 @@
 export const fig = [
     {
         name: "double tap",
-        power: "2d6"
+        dice: "2d6",
+        type: "attack"
     },
     {
         name: "Fist of Fury",
-        power: "3d6"
+        dice: "3d6",
+        type: "attack"
     },
     {
         name: "Focused Breath",
-        healing: "1d12"
+        healing: "1d12",
+        type: "healing"
     }, 
     {
         name: "Tempered Will",
-        trait: "Roll Advantage on attack moves for 2 turns"
+        trait: "Roll Advantage on attack moves for 2 turns",
+        type: "trait"
     },  
     {
         name: "Dragon Kick",
-        power: "4d8"
+        dice: "4d8",
+        type: "attack"
     },
     {
         name: "Meditate",
-        heal: "2d12"
+        heal: "2d12",
+        type: "healing"
     },
     {
         name: "Quadruple Tap",
-        power: "4d12"
+        dice: "4d12",
+        type: "attack"
     },
     {
         name: "Buddah's Palm",
-        power: "4d20"
+        dice: "4d20",
+        type: "attack"
     },
     
 ]
 
 export const arcanist = [
     {
-
-    }
+        name: "Study",
+        dice: "1d6",
+        type: "Trait"
+    },
 ]
