@@ -8,16 +8,7 @@ function Stats() {
     <ListGroup>
     <ListGroup.Item>Proficiency Bonus</ListGroup.Item>
     <ListGroup.Item>Inspiration</ListGroup.Item>
-    <ListGroup.Item>Strength
-      
-    </ListGroup.Item><Table size='sm'>
-      <tbody>
-        <tr>
-          <th>Saving Throws</th>
-          <th>Athletics</th>
-        </tr>
-      </tbody>
-    </Table>
+    <ListGroup.Item>Strength</ListGroup.Item>
     <ListGroup.Item>Dexterity</ListGroup.Item>
     <ListGroup.Item>Constitution</ListGroup.Item>
     <ListGroup.Item>Intelligence</ListGroup.Item>

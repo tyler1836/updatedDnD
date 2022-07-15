@@ -2,7 +2,6 @@ import { React, useState } from 'react'
 import Table from 'react-bootstrap/esm/Table';
 
 function Character({ props }) {
-    console.log(props);
     return (
         //db name
         <div>
@@ -19,10 +18,10 @@ function Character({ props }) {
                         <th>Background</th>
                         <th>Class</th>
                     </tr>
-                    <tbody>
-                        
-                    </tbody>
                 </thead>
+                <tbody>
+
+                </tbody>
             </Table>
         </div>
     )

@@ -13,9 +13,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.list-group{
-  max-width: 40%;
+.character{
+  min-width: 100%;
 }
-.list-group-item{
-  text-align: left;
+.stats{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+@media screen and (max-width: 500px){
+  .stats{
+    justify-content: space-between;
+    padding: 0;
+  }
 }

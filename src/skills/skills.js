@@ -48,4 +48,9 @@ export const arcanist = [
         dice: "1d6",
         type: "Trait"
     },
+    {
+        name: "Study",
+        dice: "1d6",
+        type: "Trait"
+    },
 ]
