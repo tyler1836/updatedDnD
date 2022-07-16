@@ -8,6 +8,9 @@ body {
   background-color: black;
   color: grey;
 }
+#root{
+  background-color: darkgray;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -22,10 +25,29 @@ code {
   flex-wrap: wrap;
   padding: 15px;
 }
+.largeStats{
+  display: flex;
+}
+.popout{
+  margin-right: auto;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 1px 2px 2px black;
+  border-radius: 20%;
+}
+.hardStat{
+  display: flex;
+}
+.hardStats{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
 
 @media screen and (max-width: 500px){
   .stats{
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 0;
   }
 }

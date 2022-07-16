@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
-import {GppGood, FastForward, Bolt} from '@mui/icons-material';
+import { Gi3DHammer, GiLeatherBoot, GiRun, GiShield, GiAbstract008 } from 'react-icons/gi'
 
 
 function Hits() {
@@ -35,10 +35,38 @@ function Hits() {
 
     return (
         <div>
-            <div>
-                <div className="armor"><GppGood sx={{fontSize: 150}}/><FastForward sx={{fontSize: 150}}/><Bolt sx={{fontSize: 150}}/>Based on Equip + strength</div>
-                <div className="initiative">Based on Speed?</div>
-                <div className="speed">Level up stat</div>
+            <div className='hardStat'>
+                <div className="hardStats">
+                    <div>
+                        <p>Armor Class</p>
+                    </div>
+                    <div>
+                        <GiShield style={{ fontSize: 60, color: "rgba(0,255,255,.4)" }} />
+                    </div>
+                    <div>
+                        <p>Based on Equip + strength</p>
+                    </div>
+                </div>
+                <div className="hardStats">
+                    <div>
+                        <p>Initiative</p>
+                    </div>
+                    <div>
+                        <GiAbstract008 style={{ fontSize: 60, color: "purple" }} />
+                    </div>
+                    <div>
+                        <p>Based on Equip + strength i</p>
+                    </div></div>
+                <div className="hardStats">
+                    <div>
+                        <p>Speed/Movement</p>
+                    </div>
+                    <div>
+                        <GiLeatherBoot style={{ fontSize: 60, color: "brown" }} />
+                    </div>
+                    <div>
+                        <p>Based on Equip + strength</p>
+                    </div></div>
             </div>
             <div>
                 <div className="hp"><ProgressBar now={hp} animated variant="danger" label={`${tempDamage} Health`} />{(hp == 0) ? "Uh oh time for saving throws" : ""}</div>
