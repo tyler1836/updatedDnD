@@ -23,7 +23,7 @@ function Hits() {
         if (tempDamage == maxhp) {
             return
         }
-        if ((heal + tempDamage) > maxhp) {
+        if ((Number(heal) + tempDamage) > maxhp) {
             setTempDamage(maxhp)
             setHp(100)
             return
@@ -70,17 +70,13 @@ function Hits() {
             </div>
             <div>
                 <div className="hp"><ProgressBar now={hp} animated variant="danger" label={`${tempDamage} Health`} />{(hp == 0) ? "Uh oh time for saving throws" : ""}</div>
-                <Stack direction='horizontal' gap={3}>
-                    <div>
-                        <input type="text" name='health' value={damage} onChange={() => setDamage(event.target.value)} />
-                        <label htmlFor="health"></label>
-                        <Button onClick={() => handledamage(damage)} size="sm" variant='danger' disabled={(tempDamage == 0)}>Hit</Button>
-                    </div>
-                    <div>
+                <Stack direction='vertical' gap={3}>
+                            <input type="text" name='health' value={damage} onChange={() => setDamage(event.target.value)} />
+                            <label htmlFor="health"></label>
+                            <Button onClick={() => handledamage(damage)} size="sm" variant='danger' disabled={(tempDamage == 0)}>Hit</Button>
                         <input type="text" name='health' value={tempHp} onChange={() => setTempHp(event.target.value)} />
                         <label htmlFor="health"></label>
                         <Button onClick={() => handleheal(tempHp)} size="sm" variant='success' disabled={(tempDamage == maxhp)}>Heal</Button>
-                    </div>
                 </Stack>
             </div>
 

@@ -7,6 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
   color: grey;
+  
 }
 #root{
   background-color: darkgray;
@@ -44,7 +45,17 @@ code {
   align-items: center;
   padding: 5px;
 }
-
+input{
+  border-radius: 9999em;
+  text-align: center;
+}
+.jobs{
+  display: flex;
+  justify-content: space-between;
+}
+.progress{
+  margin: 10px 0;
+}
 @media screen and (max-width: 500px){
   .stats{
     justify-content: space-evenly;

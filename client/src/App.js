@@ -18,8 +18,8 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <div>
       
-        {/* <Pugilist /> */}
-        <Arcanist />
+        <Pugilist />
+        {/* <Arcanist /> */}
     </div>
     </ThemeProvider>
   )
