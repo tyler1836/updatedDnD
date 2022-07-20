@@ -183,20 +183,60 @@ export const Fighter = [
 
 export const arcanist = [
     {
-        name: "Study",
+        name: "Ruin",
         dice: "1d6",
-        type: "Trait"
+        type: "Attack",
+        info: "Send a blast of ethereal energy"
+    },
+    {
+        name: "Summon Feyox",
+        dice: "None",
+        type: "Trait",
+        info: "Summon Fox from the Fey"
+    },
+    {
+        name: "Bio",
+        dice: "Target makes Constitution saving throw",
+        type: "Attack",
+        info: "Attempt to poison target"
+    },
+    {
+        name: "Salve",
+        dice: "1d12",
+        type: "Heal",
+        info: "Use ethereal magic to bandage targets wounds"
     },
     {
         name: "Study",
-        dice: "1d6",
-        type: "Trait"
+        dice: "None",
+        type: "Trait",
+        info: "Study Your Cerinthe ledger to add extra dice rolls on damage, saving throws, and force disadvantage on foes for 2 turns"
     },
     {
-        name: "Study",
-        dice: "1d6",
-        type: "Trait"
+        name: "Fey Slice",
+        dice: "2d10",
+        type: "Attack",
+        info: "Command your Feyox to slice at target"
     },
+    {
+        name: "Double-Ruin",
+        dice: "2d6",
+        type: "Attack",
+        info: "Summon and send 2 blasts of ethereal energy"
+    },
+    {
+        name: "",
+        dice: "2d10",
+        type: "Attack",
+        info: "Command your Feyox to slice at target"
+    },
+    {
+        name: "Fey Wind",
+        dice: "2d10",
+        type: "Heal",
+        info: "Your Feyox opens a portal to the Fey allowing winds to come through healing all allies"
+    }
+    
 ]
 export const Scholar = [
     {
