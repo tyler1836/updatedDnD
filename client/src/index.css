@@ -45,6 +45,9 @@ code {
   align-items: center;
   padding: 5px;
 }
+.home img{
+  object-fit: cover;
+}
 input{
   border-radius: 9999em;
   text-align: center;
