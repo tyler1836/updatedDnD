@@ -3,9 +3,9 @@ module.exports = gql`
 type Character {
   _id: ID!
   name: String!
-  stats: [stat]
-  personalities: [personality]
-  equipments: [equipment]
+  stats: [Stat]
+  personalities: [Personality]
+  equipments: [Equipment]
   experience: Int
   race: String!
   alignment: String!
