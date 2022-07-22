@@ -7,9 +7,24 @@ const Equipment = require('./equipment')
 
 const characterSchema = new Schema({
     name: String,
-    stats: [Stat],
-    personalities: [Personality],
-    equipments: [Equipment],
+    stats: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Stat"
+        }
+    ],
+    personalities: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Personality"
+        }
+    ],
+    equipments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Equipment"
+        }
+    ],
     experience: Int,
     race: String,
     alignment: String,
