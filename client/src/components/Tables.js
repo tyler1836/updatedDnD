@@ -94,18 +94,18 @@ function Tables(props) {
 
                     }{(props.level >= 27) ?
                         <tr>
-                            <th>{props.props[8].name}</th>
-                            <th>{props.props[8].dice}</th>
-                            <th>{props.props[8].type}</th>
-                            <th>{props.props[8].info}</th>
-                        </tr> : <tr></tr>
-
-                    }{(props.level >= 30) ?
-                        <tr>
                             <th>{props.props[9].name}</th>
                             <th>{props.props[9].dice}</th>
                             <th>{props.props[9].type}</th>
                             <th>{props.props[9].info}</th>
+                        </tr> : <tr></tr>
+
+                    }{(props.level >= 31) ?
+                        <tr>
+                            <th>{props.props[10].name}</th>
+                            <th>{props.props[10].dice}</th>
+                            <th>{props.props[10].type}</th>
+                            <th>{props.props[10].info}</th>
                         </tr> : <tr></tr>
 
                     }

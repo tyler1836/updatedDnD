@@ -19,9 +19,10 @@ function App() {
 
   return (
     <div>
-      <div className='home'>
-      <img src="https://images.pexels.com/photos/970517/pexels-photo-970517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset="" />
-      </div>
+    {/* //   <div className='home'>
+    //   <img src="https://images.pexels.com/photos/970517/pexels-photo-970517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset="" />
+    //   </div> */}
+    <Pugilist />
     </div>
   )
 }
