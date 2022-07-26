@@ -1,79 +1,36 @@
-const { ApolloServer, gql } = require('apollo-server');
+const express = require('express')
+const { ApolloServer } = require('apollo-server-express');
+const {authMiddleware} = require('./utils/auth')
 
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
-const typeDefs = gql`
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+const {typeDefs, resolvers} = require('./schemas')
 
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Character {
-  _id: ID!
-  name: String!
-  stats: Int
-  personalities: String
-  equipments: String
-  experience: Int
-  race: String!
-  alignment: String!
-  background: String!
-  createdAt: String!
-  user: User
-  }
-  type User {
-  _id: ID!
-  username: String!
-  password: String!
-  email: String!
-  token: String!
-  createdAt: String!
-  characters:[Character]
-}
+const db = require('./config/connection')
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    user: [Character]
-  }
-`;
-const Character = [
-  {
-    name: "tyler",
-    stats: 45,
-    personalities: "strong",
-    equipments: "axe",
-    experience: 300,
-    race: "String!",
-    alignment: "String!",
-    background: "String!",
-    createdAt: "String!"
-  },
-  {
-    name: "tyler2",
-    stats: 78,
-    personalities: "bold",
-    equipments: "sword",
-    experience: 300,
-    race: "String!",
-    alignment: "String!",
-    background: "String!",
-    createdAt: "String!"
-  },
-];
-const resolvers = {
-  Query: {
-    user: () => Character,
-  },
-};
-const server = new ApolloServer({
+const PORT = process.env.PORT || 3001
+const app = express()
+
+const startServer = async () => {
+  const server = new ApolloServer({
   typeDefs,
   resolvers,
-  csrfPrevention: true,
-  cache: 'bounded',
-});
+  context: authMiddleware
+})
 
-// The `listen` method launches a web server.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+await server.start()
+
+server.applyMiddleware({app})
+
+console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`)
+}
+
+startServer()
+
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
+
+
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+  });
 });

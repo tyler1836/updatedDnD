@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,6 +7,29 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import React from 'react'
+
+//middleware to retrieve jwt set in local storage
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+const httpLink = createHttpLink({
+  uri: '/graphql'
+})
+const client = new ApolloClient({
+  //concat with request link to graphql
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+})
+
+import Header from './classes/Header'
+import Home from './classes/Home'
+import NotFound from './classes/NotFound'
 import Arcanist from './classes/Arcanist'
 import Pugilist from './classes/Pugilist'
 /* 
@@ -18,11 +41,19 @@ updates:
 function App() {
 
   return (
-    <div>
-      <div className='home'>
-      <img src="https://images.pexels.com/photos/970517/pexels-photo-970517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset="" />
-      </div>
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <Header />
+        <div>
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path="/login" element={<Arcanist />} />
+            <Route exact path="/signup" element={<Pugilist />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </div>
+      </Router>
+    </ApolloProvider>
   )
 }
 
