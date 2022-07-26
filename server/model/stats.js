@@ -1,23 +1,22 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const {Schema, model} = require('mongoose')
 const Character = require('./character.js')
 
 const statSchema = new Schema({
-    proficiency: Int,
-    inspiration: Int,
-    strength: Int,
-    dexterity: Int,
-    constitution: Int,
-    intelligence: Int,
-    wisdom: Int,
-    charisma: Int,
-    perception: Int,
-    armor: Int, 
-    initiative: Int, 
-    speed: Int,
-    health: Int, 
-    level: Int,
-    character: Character
+    proficiency: Number,
+    inspiration: Number,
+    strength: Number,
+    dexterity: Number,
+    constitution: Number,
+    intelligence: Number,
+    wisdom: Number,
+    charisma: Number,
+    perception: Number,
+    armor: Number, 
+    initiative: Number, 
+    speed: Number,
+    health: Number, 
+    level: Number,
 })
 
-module.exports = mongoose.model('Stat', statSchema)
+const Stats = model('Stat', statSchema)
+module.exports = Stats

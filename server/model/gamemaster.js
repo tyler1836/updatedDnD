@@ -1,14 +1,16 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const User = require('./user.js')
+const {Schema, model} = require('mongoose')
+
 
 const gmSchema = new Schema({
-    username: String,
-    password: String,
-    email: String,
-    token: String,
-    createdAt: String,
-    users: [User]
+    players: 
+    [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
+    username: String
 })
 
-module.exports = mongoose.model('GameMaster', gmSchema)
+
+module.exports = gmSchema

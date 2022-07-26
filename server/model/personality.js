@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const {Schema, model} = require('mongoose')
 const Character = require('./character')
 
 const personalitySchema = new Schema({
@@ -9,7 +8,7 @@ const personalitySchema = new Schema({
     flaws: String, 
     proficiencies: String, 
     languages: String, 
-    character: Character
 })
 
-module.exports = mongoose.model('Personality', personalitySchema)
+const Personality = model('Personality', personalitySchema)
+module.exports = Personality
