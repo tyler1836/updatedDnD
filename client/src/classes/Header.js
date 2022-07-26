@@ -20,7 +20,7 @@ const Header = () => {
                 ) : (
                     <Nav className="me-auto">
                         <Nav.Link> <Link to='/'>Home</Link> </Nav.Link>
-                        <Nav.Link onClick={() => setLoginShow(!loginShow)}>Login</Nav.Link>
+                        <Nav.Link onClick={() => setLoginShow(!loginShow)}><Link to='/login'>Login</Link></Nav.Link>
                         <Nav.Link onClick={() => setSignUpShow(!signUpShow)}>Sign up</Nav.Link>
                     </Nav>
                 )}
