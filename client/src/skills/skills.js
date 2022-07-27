@@ -319,4 +319,5 @@ export const Summoner = [
         dice: "1d6",
         type: "Trait"
     },
+    "hello"
 ]
