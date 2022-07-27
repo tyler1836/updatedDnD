@@ -14,14 +14,23 @@ const Header = () => {
     return (
         <Navbar bg="light" variant="light">
             <Container>
-                <Navbar.Brand href="#home">D&D</Navbar.Brand>
+                <Navbar.Brand>D&D</Navbar.Brand>
                 {Auth.loggedIn() ? (
-                    <div>Hello</div>
+                    <>
+                        <Nav className='me-auto'>
+                            <Nav.Link> <Link to='/'>Home</Link> </Nav.Link>
+                            <Nav.Link><Link to="/profile">Me</Link></Nav.Link>
+                            <Nav.Link> <a href="/" onClick={() => {localStorage.removeItem('id_token'), window.location.assign('/')}}>
+                                Logout
+                            </a></Nav.Link>
+
+                        </Nav>
+                    </>
                 ) : (
                     <Nav className="me-auto">
                         <Nav.Link> <Link to='/'>Home</Link> </Nav.Link>
-                        <Nav.Link onClick={() => setLoginShow(!loginShow)}><Link to='/login'>Login</Link></Nav.Link>
-                        <Nav.Link onClick={() => setSignUpShow(!signUpShow)}>Sign up</Nav.Link>
+                        <Nav.Link><Link to='/login'>Login</Link></Nav.Link>
+                        <Nav.Link><Link to='/login'>Sign up</Link></Nav.Link>
                     </Nav>
                 )}
                 {loginShow ?

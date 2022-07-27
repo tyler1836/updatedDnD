@@ -21,6 +21,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+a{
+  color: darkgray!important;
+  text-decoration: none!important;
+}
+a:hover{
+  transform: scale(1.4);
+}
 .character{
   min-width: 100%;
 }
@@ -75,9 +82,48 @@ input{
 }
 .loggedIn{
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  background-color: lightgray;
+  height: 100vh;
+  text-align: center;
+}
+.getProfile{
+  max-width: 40%;
+  background-color: darkgray;
+  padding: 5px 30px;
+  border-radius: 10px;
+  max-height: fit-content;
+}
+@media screen and (max-width: 960px){
+  .banner{
+    max-width: 0%;
+  }
+  .loggedIn{
+    display: inline-block;
+    height: fit-content;
+  }
+  .getProfile{
+    max-width: fit-content;
+    margin: 30px;
+  }
+  .stats{
+    justify-content: space-evenly;
+    padding: 0;
+  }
 }
 @media screen and (max-width: 500px){
+  .banner{
+    max-width: 0%;
+  }
+  .loggedIn{
+    display: inline-block;
+    height: fit-content;
+  }
+  .getProfile{
+    max-width: fit-content;
+    margin: 30px;
+  }
   .stats{
     justify-content: space-evenly;
     padding: 0;

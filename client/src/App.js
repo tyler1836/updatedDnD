@@ -32,7 +32,10 @@ import Home from './classes/Home'
 import NotFound from './classes/NotFound'
 import Arcanist from './classes/Arcanist'
 import Pugilist from './classes/Pugilist'
+import Sorcerer from './classes/Thief';
 import Signup from './classes/Signup';
+import Profile from './classes/Profile';
+import CreateCharacter from './classes/CreateCharacter';
 /* 
 updates:
   need database
@@ -49,6 +52,9 @@ function App() {
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route exact path="/login" element={<Signup />} />
+            <Route exact path='/profile' element={<Profile />}/>
+            <Route exact path='/create' element={<CreateCharacter />}/>
+
             <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
