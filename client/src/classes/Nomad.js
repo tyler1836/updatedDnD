@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from "react";
-import { soldier, Berserker, Paladin, DarkKnight} from "../skills/skills.js"
+import {nomad, Druid, BeastMaster, Geomancer} from "../skills/skills.js"
 import JobConf from '../components/JobConf';
 
 import Tables from "../components/Tables.js";
@@ -11,10 +11,10 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/button';
 import Stack from 'react-bootstrap/Stack';
 
-function Soldier() {
+function Nomad() {
   const [level, setLevel] = useState(29)
-  const [job, setJob] = useState(soldier)
-  const [jobName, setJobName] = useState('Soldier')
+  const [job, setJob] = useState(nomad)
+  const [jobName, setJobName] = useState('Nomad')
   const [show, setShow] = useState(false)
   const [combat, setCombat] = useState(false)
   const [newLevel, setNewLevel] = useState(level)
@@ -68,15 +68,15 @@ function Soldier() {
         onHide={() => setShow(false)}
         job={job}
         jobName={jobName}
-        reset={() => {setJobName('Soldier'), setJob(soldier)}}
+        reset={() => {setJobName('Nomad'), setJob(Nomad)}}
         selected={()=> setPickJob(false)}
-        info={(jobName == 'Berserker') ? "Tanking" : (jobName == "Paladin") ? "Tanking" : "Tanking"}
+        info={(jobName == 'Druid') ? "Damage" : (jobName == "Beast Master") ? "Utility" : "Damage"}
       />
         {(pickJob) ? 
         <div className='jobs'>
-        <Button variant='primary' onClick={() => {setShow(!show), setJobName('Berserker'), setJob(Berserker)}} disabled={(jobName == 'Berserker')}>Choose Berserker</Button>
-        <Button variant='light' onClick={() => {setShow(!show), setJobName("Paladin"), setJob(Paladin)}} disabled={(jobName == "Paladin")}>Choose Paladin</Button> 
-        <Button variant='dark' onClick={() => {setShow(!show), setJobName('Dark Knight'), setJob(DarkKnight)}} disabled={(jobName == 'Dark Knight')}>Choose Dark Knight</Button> 
+        <Button variant='success' onClick={() => {setShow(!show), setJobName('Druid'), setJob(Druid)}} disabled={(jobName == 'Druid')}>Choose Druid</Button>
+        <Button variant='secondary' onClick={() => {setShow(!show), setJobName('Beast Master'), setJob(BeastMaster)}} disabled={(jobName == 'Beast Master')}>Choose Beast Master</Button> 
+        <Button variant='warning' onClick={() => {setShow(!show), setJobName('Geomancer'), setJob(Geomancer)}} disabled={(jobName == 'Geomancer')}>Choose Geomancer</Button> 
         </div>
         : ''}
         <Bag 
@@ -86,4 +86,4 @@ function Soldier() {
   )
 }
 
-export default Soldier;
+export default Nomad;

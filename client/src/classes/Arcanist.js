@@ -24,23 +24,23 @@ function Arcanist() {
   const [percent, setPercent] = useState("")
   const [pickJob, setPickJob] = useState(false)
   useEffect(() => {
-      let levelUp = Math.floor(Math.random() * (2 * newLevel ) + (newLevel * 100))
-      setMaxXp(levelUp)
+    let levelUp = Math.floor(Math.random() * (2 * newLevel) + (newLevel * 100))
+    setMaxXp(levelUp)
   }, [newLevel])
   const levelUp = () => {
-      let levels = newLevel + 1
-      if(levels == 30){
-        setPickJob(true)
-      }
-      setNewLevel(levels)
-      setExp(0)
-      setPercent(0)
+    let levels = newLevel + 1
+    if (levels == 30) {
+      setPickJob(true)
+    }
+    setNewLevel(levels)
+    setExp(0)
+    setPercent(0)
   }
   const addXp = (xp) => {
-      let percentage = Number(percent) + ((Number(xp)/maxXp) * 100)
-      setPercent(percentage)
-      setExp(Number(exp) + Number(xp))
-      setTempXp("")
+    let percentage = Number(percent) + ((Number(xp) / maxXp) * 100)
+    setPercent(percentage)
+    setExp(Number(exp) + Number(xp))
+    setTempXp("")
   }
   return (
     <div>
@@ -53,30 +53,31 @@ function Arcanist() {
           <Hits />
         </div>
         <Stack direction='vertical' gap={3}>
-        <ProgressBar now={percent} animated variant="info" striped label={`${exp}  / ${maxXp}xp`} />
-            <p>{`${maxXp}`}</p>
-            <input type="text" name='xp' value={tempXp} onChange={() => setTempXp(event.target.value)} />
-            <label htmlFor="xp"></label>
-            <Button onClick={() => addXp(tempXp)} size="md" variant='dark' disabled={(Number(exp) >= maxXp)}>Add XP</Button>
-            <Button onClick={() => levelUp()} disabled={(newLevel == 50) || (Number(exp) < maxXp) || pickJob} variant="warning">{(newLevel == 50) ? "Max Level" : "Level Up"} </Button>
-          <Tables props={job} level={newLevel} />
+          <ProgressBar now={percent} animated variant="info" striped label={`${exp}  / ${maxXp}xp`} />
+          <p>{`${maxXp}`}</p>
+          <input type="text" name='xp' value={tempXp} onChange={() => setTempXp(event.target.value)} />
+          <label htmlFor="xp"></label>
+          <Button onClick={() => addXp(tempXp)} size="md" variant='dark' disabled={(Number(exp) >= maxXp)}>Add XP</Button>
+          <Button onClick={() => levelUp()} disabled={(newLevel == 50) || (Number(exp) < maxXp) || pickJob} variant="warning">{(newLevel == 50) ? "Max Level" : "Level Up"} </Button>
+          <Button onClick={() => setCombat(!combat)}>Show/Hide Skills</Button>
+          {(combat) ? <Tables props={job} level={newLevel} /> : ''}
         </Stack>
-      <JobConf
-        show={show}
-        onHide={() => setShow(false)}
-        job={job}
-        jobName={jobName}
-        reset={() => {setJobName('Arcanist'), setJob(arcanist)}}
-        selected={()=> setPickJob(false)}
-        info={(jobName == 'Scholar') ? "Healing" : "Damage"}
-      />
-        {(pickJob) ? 
-        <div className='jobs'>
-        <Button variant='success' onClick={() => {setShow(!show), setJobName('Scholar'), setJob(Scholar)}} disabled={(jobName == 'Scholar')}>Choose Scholar</Button>
-        <Button variant='danger' onClick={() => {setShow(!show), setJobName('Summoner'), setJob(Summoner)}} disabled={(jobName == 'Summoner')}>Choose Summoner</Button> 
-        </div>
-        : ''}
-        <Bag 
+        <JobConf
+          show={show}
+          onHide={() => setShow(false)}
+          job={job}
+          jobName={jobName}
+          reset={() => { setJobName('Arcanist'), setJob(arcanist) }}
+          selected={() => setPickJob(false)}
+          info={(jobName == 'Scholar') ? "Healing" : "Damage"}
+        />
+        {(pickJob) ?
+          <div className='jobs'>
+            <Button variant='success' onClick={() => { setShow(!show), setJobName('Scholar'), setJob(Scholar) }} disabled={(jobName == 'Scholar')}>Choose Scholar</Button>
+            <Button variant='danger' onClick={() => { setShow(!show), setJobName('Summoner'), setJob(Summoner) }} disabled={(jobName == 'Summoner')}>Choose Summoner</Button>
+          </div>
+          : ''}
+        <Bag
         />
       </div>
     </div>
