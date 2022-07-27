@@ -12,6 +12,7 @@ export const QUERY_ME = gql`
       stats {
         level
       }
+      background
       race
       alignment
     }

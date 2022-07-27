@@ -18,9 +18,16 @@ function Profile() {
           {user.characters.map(character => {
             console.log(character);
             return(
+              <div style={{display: "flex", justifyContent: 'space-between'}} id={character._id}>
               <div>
                 <h5>{character.name}</h5>
-                <h6>{character.alignment}</h6>
+              </div>
+              <div>
+                <h6>Race: {character.race}</h6>
+                <h6>Alignment: {character.alignment}</h6>
+                <h6>Background: {character.background}</h6>
+              </div>
+              {/* delete button and add stats button passing id in */}
               </div>
             )   
           })}

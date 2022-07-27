@@ -17,6 +17,7 @@ function Arcanist() {
   const [job, setJob] = useState(Summoner)
   const [jobName, setJobName] = useState('Arcanist')
   const [show, setShow] = useState(false)
+  const [combat, setCombat] = useState(false)
   const [newLevel, setNewLevel] = useState(level)
   const [maxXp, setMaxXp] = useState(0)
   const [exp, setExp] = useState("")
