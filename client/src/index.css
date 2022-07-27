@@ -73,11 +73,9 @@ input{
   line-height: 2rem;
   text-align: center;
 }
-.logged{
-  z-index: 999;
-  background-color: white;
-  border: 3px 3px blueviolet;
-  align-content: center;
+.loggedIn{
+  display: flex;
+  justify-content: space-around;
 }
 @media screen and (max-width: 500px){
   .stats{

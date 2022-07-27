@@ -107,7 +107,48 @@ function Tables(props) {
                             <th>{props.props[10].type}</th>
                             <th>{props.props[10].info}</th>
                         </tr> : <tr></tr>
-
+                    }{(props.level >= 33) ?
+                        <tr>
+                            <th>{props.props[11].name}</th>
+                            <th>{props.props[11].dice}</th>
+                            <th>{props.props[11].type}</th>
+                            <th>{props.props[11].info}</th>
+                        </tr> : <tr></tr>
+                    }{(props.level >= 36) ?
+                        <tr>
+                            <th>{props.props[12].name}</th>
+                            <th>{props.props[12].dice}</th>
+                            <th>{props.props[12].type}</th>
+                            <th>{props.props[12].info}</th>
+                        </tr> : <tr></tr>
+                    }{(props.level >= 39) ?
+                        <tr>
+                            <th>{props.props[13].name}</th>
+                            <th>{props.props[13].dice}</th>
+                            <th>{props.props[13].type}</th>
+                            <th>{props.props[13].info}</th>
+                        </tr> : <tr></tr>
+                    }{(props.level >= 42) ?
+                        <tr>
+                            <th>{props.props[14].name}</th>
+                            <th>{props.props[14].dice}</th>
+                            <th>{props.props[14].type}</th>
+                            <th>{props.props[14].info}</th>
+                        </tr> : <tr></tr>
+                    }{(props.level >= 46) ?
+                        <tr>
+                            <th>{props.props[15].name}</th>
+                            <th>{props.props[15].dice}</th>
+                            <th>{props.props[15].type}</th>
+                            <th>{props.props[15].info}</th>
+                        </tr> : <tr></tr>
+                    }{(props.level >= 50) ?
+                        <tr>
+                            <th>{props.props[16].name}</th>
+                            <th>{props.props[16].dice}</th>
+                            <th>{props.props[16].type}</th>
+                            <th>{props.props[16].info}</th>
+                        </tr> : <tr></tr>
                     }
                 </tbody>
             </Table>

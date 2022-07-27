@@ -13,8 +13,8 @@ import Stack from 'react-bootstrap/Stack';
 
 
 function Arcanist() {
-  const [level, setLevel] = useState(29)
-  const [job, setJob] = useState(arcanist)
+  const [level, setLevel] = useState(49)
+  const [job, setJob] = useState(Summoner)
   const [jobName, setJobName] = useState('Arcanist')
   const [show, setShow] = useState(false)
   const [newLevel, setNewLevel] = useState(level)
@@ -24,7 +24,7 @@ function Arcanist() {
   const [percent, setPercent] = useState("")
   const [pickJob, setPickJob] = useState(false)
   useEffect(() => {
-      let levelUp = Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
+      let levelUp = Math.floor(Math.random() * (2 * newLevel ) + (newLevel * 100))
       setMaxXp(levelUp)
   }, [newLevel])
   const levelUp = () => {
