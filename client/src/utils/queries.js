@@ -15,6 +15,18 @@ export const QUERY_ME = gql`
       background
       race
       alignment
+      class
+    }
+  }
+}
+`
+export const QUERY_USERS = gql`
+{
+  users {
+    username
+    isGm
+    gamemasters {
+      username
     }
   }
 }

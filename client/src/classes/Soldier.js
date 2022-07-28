@@ -43,7 +43,7 @@ function Soldier() {
       setTempXp("")
   }
   return (
-    <div>
+    <div className='inside'>
       <div>
         <div className='character'>
           <Character props={job} />

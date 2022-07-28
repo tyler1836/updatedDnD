@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <Navbar bg="light" variant="light">
             <Container>
-                <Navbar.Brand>D&D</Navbar.Brand>
+                <Navbar.Brand style={{fontSize: '1.6rem'}}>D&D</Navbar.Brand>
                 {Auth.loggedIn() ? (
                     <>
                         <Nav className='me-auto'>

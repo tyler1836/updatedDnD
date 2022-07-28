@@ -27,15 +27,16 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-import Header from './classes/Header'
-import Home from './classes/Home'
-import NotFound from './classes/NotFound'
+import Header from './userPages/Header'
+import Home from './userPages/Home'
+import NotFound from './userPages/NotFound'
+import Stats from './userPages/Stats'
 import Arcanist from './classes/Arcanist'
 import Pugilist from './classes/Pugilist'
 import Sorcerer from './classes/Thief';
-import Signup from './classes/Signup';
-import Profile from './classes/Profile';
-import CreateCharacter from './classes/CreateCharacter';
+import Signup from './userPages/Signup';
+import Profile from './userPages/Profile';
+import CreateCharacter from './userPages/CreateCharacter';
 /* 
 updates:
   need database
@@ -55,6 +56,7 @@ function App() {
             <Route exact path='/profile' element={<Profile />}/>
             <Route exact path='/create' element={<CreateCharacter />}/>
             <Route exact path='/arcanist' element={<Arcanist />}/>
+            <Route exact path='/stats' element={<Stats />}/>
 
             <Route path='*' element={<NotFound />} />
           </Routes>

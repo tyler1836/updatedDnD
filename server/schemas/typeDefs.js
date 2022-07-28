@@ -9,6 +9,7 @@ type Character {
   personality: [Personality]
   equipment: [Equipment]
   # 
+  class: String
   experience: Int
   race: String
   alignment: String
@@ -55,6 +56,7 @@ type User {
   createdAt: String
   isGm: Boolean
   characters: [Character]
+  gamemasters: [User]
 }
 type Gamemaster{
     _id: ID
@@ -66,6 +68,7 @@ type Auth{
 }
 type Query {
   me: User
+  users: [User]
   characters: [Character]
   character(_id: ID!): Character 
   gamemasters: [Gamemaster]
@@ -83,14 +86,18 @@ type Mutation {
     username: String!, 
     email: String!, 
     password: String! 
-    isGm: Boolean
+    isGm: Boolean!
     ): Auth
   addCharacter(
     name: String!,
     race: String!,
-    alignment: String!, 
-    background: String
+    alignment: String!,
+    class: String! 
+    background: String!
     ): Character
+  deleteCharacter(
+    characterId: ID!
+  ): Character
   addStats(
     characterId: ID!
     proficiency: Int

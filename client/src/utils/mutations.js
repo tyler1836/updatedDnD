@@ -25,8 +25,16 @@ export const ADD_USER = gql`
 `
 
 export const CREATE_CHARACTER = gql`
-  mutation createChar($name: String!, $race: String!, $alignment: String!, $background: String) {
-    addCharacter(name: $name, race: $race, alignment: $alignment, background: $background) {
+  mutation createChar($name: String!, $race: String!, $alignment: String!, $background: String!, $class: String!) {
+    addCharacter(name: $name, race: $race, alignment: $alignment, background: $background, class: $class) {
+    name
+  }
+}
+`
+
+export const DELETE_CHARACTER = gql`
+  mutation deleteCharacter($characterId: ID!) {
+    deleteCharacter(characterId: $characterId) {
     name
   }
 }
