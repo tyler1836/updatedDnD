@@ -54,6 +54,7 @@ function App() {
             <Route exact path="/login" element={<Signup />} />
             <Route exact path='/profile' element={<Profile />}/>
             <Route exact path='/create' element={<CreateCharacter />}/>
+            <Route exact path='/arcanist' element={<Arcanist />}/>
 
             <Route path='*' element={<NotFound />} />
           </Routes>
