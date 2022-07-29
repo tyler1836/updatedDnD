@@ -1,7 +1,11 @@
 import {React, useState, useEffect} from "react";
 import { RedMage, sorcerer, WhiteMage, BlackMage} from "../skills/skills.js"
-import JobConf from '../components/JobConf';
+import {useQuery} from '@apollo/client'
+import { QUERY_CHARACTER } from "../utils/queries.js";
+import { useParams } from 'react-router-dom';
 
+
+import JobConf from '../components/JobConf';
 import Tables from "../components/Tables.js";
 import Bag from '../components/Bag';
 import Character from '../components/Character'
@@ -12,9 +16,15 @@ import Button from 'react-bootstrap/button';
 import Stack from 'react-bootstrap/Stack';
 
 function Sorcerer() {
-  const [level, setLevel] = useState(29)
+  const {id: characterId} = useParams()
+  const {loading, data, error} = useQuery(QUERY_CHARACTER, {
+    variables: {id: characterId}
+  })
+  const character = data?.character || []
+  console.log(character);
+  const [level, setLevel] = useState(character?.stats[0].level || 10)
   const [job, setJob] = useState(sorcerer)
-  const [jobName, setJobName] = useState('Sorcerer')
+  const [jobName, setJobName] = useState(character?.class || "")
   const [show, setShow] = useState(false)
   const [combat, setCombat] = useState(false)
   const [newLevel, setNewLevel] = useState(level)
@@ -23,6 +33,7 @@ function Sorcerer() {
   const [tempXp, setTempXp] = useState("")
   const [percent, setPercent] = useState("")
   const [pickJob, setPickJob] = useState(false)
+
   useEffect(() => {
       let levelUp = Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
       setMaxXp(levelUp)
@@ -42,15 +53,18 @@ function Sorcerer() {
       setExp(Number(exp) + Number(xp))
       setTempXp("")
   }
+  if(loading){
+    return <div>Loading...</div>
+  }
   return (
     <div className='inside'>
       <div>
         <div className='character'>
-          <Character props={job} />
+          <Character props={job} character={character}/>
         </div>
         <div className='stats'>
-          <Stats />
-          <Hits />
+          <Stats character={character}/>
+          <Hits character={character}/>
         </div>
         <Stack direction='vertical' gap={3}>
         <ProgressBar now={percent} animated variant="info" striped label={`${exp}  / ${maxXp}xp`} />

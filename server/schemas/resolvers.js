@@ -44,6 +44,7 @@ const resolvers = {
             throw new AuthenticationError('Please log in!')
         },
         character: async (parent, args) => {
+            console.log('stupid')
             const char = await Character.findById({ _id: args._id })
                 .populate('stats')
                 .populate('personality')
@@ -120,6 +121,7 @@ const resolvers = {
             health,
             level
         }) => {
+            
             const stat = await Stats.create({
                 proficiency,
                 inspiration,
@@ -142,6 +144,7 @@ const resolvers = {
                 { $push: { stats: stat } },
                 { new: true }
             )
+            console.log('not working')
             return character
 
         },

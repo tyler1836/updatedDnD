@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -30,10 +30,9 @@ const client = new ApolloClient({
 import Header from './userPages/Header'
 import Home from './userPages/Home'
 import NotFound from './userPages/NotFound'
-import Stats from './userPages/Stats'
+import Sorcerer from './classes/Sorcerer'
 import Arcanist from './classes/Arcanist'
 import Pugilist from './classes/Pugilist'
-import Sorcerer from './classes/Thief';
 import Signup from './userPages/Signup';
 import Profile from './userPages/Profile';
 import CreateCharacter from './userPages/CreateCharacter';
@@ -50,16 +49,16 @@ function App() {
       <Router>
         <Header />
         <div>
-          <Routes>
-            <Route exact path='/' element={<Home />} />
+          <Switch>
+            <Route exact path='/' component={Home} />
             <Route exact path="/login" element={<Signup />} />
-            <Route exact path='/profile' element={<Profile />}/>
-            <Route exact path='/create' element={<CreateCharacter />}/>
-            <Route exact path='/arcanist' element={<Arcanist />}/>
-            <Route exact path='/stats' element={<Stats />}/>
+            <Route exact path='/profile' component={Profile}/>
+            <Route exact path='/create' component={CreateCharacter}/>
+            <Route exact path='/arcanist' component={Arcanist}/>
+            <Route exact path='/sorcerer/:id' component={Sorcerer }/>
 
-            <Route path='*' element={<NotFound />} />
-          </Routes>
+            <Route path='*' component={NotFound} />
+          </Switch>
         </div>
       </Router>
     </ApolloProvider>

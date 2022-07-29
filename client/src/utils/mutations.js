@@ -39,3 +39,10 @@ export const DELETE_CHARACTER = gql`
   }
 }
 `
+
+export const ADD_STATS = gql`
+mutation($characterId: ID!, $strength: Int, $dexterity: Int, $constitution: Int, $intelligence: Int, $wisdom: Int, $charisma: Int, $perception: Int, $health: Int, $level: Int, $speed: Int, $initiative: Int, $armor: Int) {
+  addStats(characterId: $characterId, strength: $strength, dexterity: $dexterity, constitution: $constitution, intelligence: $intelligence, wisdom: $wisdom, charisma: $charisma, perception: $perception, health: $health, level: $level, speed: $speed, initiative: $initiative, armor: $armor) {
+    strength
+  }
+}`
