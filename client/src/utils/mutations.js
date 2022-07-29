@@ -25,9 +25,24 @@ export const ADD_USER = gql`
 `
 
 export const CREATE_CHARACTER = gql`
-  mutation createChar($name: String!, $race: String!, $alignment: String!, $background: String) {
-    addCharacter(name: $name, race: $race, alignment: $alignment, background: $background) {
+  mutation createChar($name: String!, $race: String!, $alignment: String!, $background: String!, $class: String!) {
+    addCharacter(name: $name, race: $race, alignment: $alignment, background: $background, class: $class) {
     name
   }
 }
 `
+
+export const DELETE_CHARACTER = gql`
+  mutation deleteCharacter($characterId: ID!) {
+    deleteCharacter(characterId: $characterId) {
+    name
+  }
+}
+`
+
+export const ADD_STATS = gql`
+mutation($characterId: ID!, $strength: Int, $dexterity: Int, $constitution: Int, $intelligence: Int, $wisdom: Int, $charisma: Int, $perception: Int, $health: Int, $level: Int, $speed: Int, $initiative: Int, $armor: Int) {
+  addStats(characterId: $characterId, strength: $strength, dexterity: $dexterity, constitution: $constitution, intelligence: $intelligence, wisdom: $wisdom, charisma: $charisma, perception: $perception, health: $health, level: $level, speed: $speed, initiative: $initiative, armor: $armor) {
+    strength
+  }
+}`

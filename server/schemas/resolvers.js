@@ -10,11 +10,12 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
     Query: {
+        users: async (parent, args) => {
+            const users = await User.find().select('-__v -password')
+            return users
+        },
         me: async (parent, args, context) => {
             const user = await User.find()
-            const { isGm } = user[0]
-            console.log(isGm)
-            console.log(context.user)
             if (context.user) {
                 const userData = User.findOne({ _id: context.user._id })
                     .select('-__v -password')
@@ -43,6 +44,7 @@ const resolvers = {
             throw new AuthenticationError('Please log in!')
         },
         character: async (parent, args) => {
+            console.log('stupid')
             const char = await Character.findById({ _id: args._id })
                 .populate('stats')
                 .populate('personality')
@@ -97,6 +99,10 @@ const resolvers = {
 
             throw new AuthenticationError('You need to be logged in!');
         },
+        deleteCharacter: async (parent, {characterId}) => {
+            const char = await Character.findByIdAndDelete(characterId)
+            return char
+        },
         //destructure args so characterid isnt passed as a stat
         addStats: async (parent, {
             characterId,
@@ -115,6 +121,7 @@ const resolvers = {
             health,
             level
         }) => {
+            
             const stat = await Stats.create({
                 proficiency,
                 inspiration,
@@ -137,6 +144,7 @@ const resolvers = {
                 { $push: { stats: stat } },
                 { new: true }
             )
+            console.log('not working')
             return character
 
         },

@@ -3,9 +3,7 @@
 }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Grenze Gotisch', sans-serif!important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
@@ -19,7 +17,7 @@ html, body{
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
 a{
   color: darkgray!important;
@@ -28,24 +26,31 @@ a{
 a:hover{
   transform: scale(1.4);
 }
+input{
+  border-radius: 9999em;
+  text-align: center;
+}
 .character{
   min-width: 100%;
 }
-.stats{
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 15px;
+.characterCreate{
+  font-family: 'Cinzel Decorative', cursive;
+  text-align: center;
+  margin: 10px 0;
 }
-.largeStats{
-  display: flex;
+.characterCreate button{
+  margin-top: 10px;
 }
-.popout{
-  margin-right: auto;
-  background-color: white;
-  padding: 10px;
-  box-shadow: 1px 2px 2px black;
-  border-radius: 20%;
+.characterList{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid black;
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+.characterList:hover{
+  background-color: beige;
 }
 .hardStat{
   display: flex;
@@ -59,16 +64,52 @@ a:hover{
 .home img{
   object-fit: cover;
 }
-input{
-  border-radius: 9999em;
-  text-align: center;
+.inside{
+  font-family: 'Cinzel';
 }
 .jobs{
   display: flex;
   justify-content: space-between;
 }
+.list-group-item.active{
+  background-color: white!important;
+}
+.largeStats{
+  display: flex;
+}
+.loggedIn{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: lightgray;
+  height: 100vh;
+  text-align: center;
+}
 .progress{
   margin: 10px 0;
+}
+.profile{
+  font-family: 'Grenze Gotisch', cursive, sans-serif;
+}
+.popout{
+  margin-right: auto;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 1px 2px 2px black;
+  border-radius: 20%;
+}
+.getProfile{
+  max-width: 40%;
+  background-color: darkgray;
+  padding: 5px 30px;
+  border-radius: 10px;
+  max-height: fit-content;
+}
+.stats{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 15px;
 }
 .welcome{
   display: flex;
@@ -79,21 +120,6 @@ input{
 .welcome p{
   line-height: 2rem;
   text-align: center;
-}
-.loggedIn{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background-color: lightgray;
-  height: 100vh;
-  text-align: center;
-}
-.getProfile{
-  max-width: 40%;
-  background-color: darkgray;
-  padding: 5px 30px;
-  border-radius: 10px;
-  max-height: fit-content;
 }
 @media screen and (max-width: 960px){
   .banner{
