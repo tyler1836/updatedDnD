@@ -1,4 +1,10 @@
 import {React, useState, useEffect} from "react";
+import { useMutation } from "@apollo/client";
+import {LEVEL_UP } from '../utils/mutations'
+import { useParams } from "react-router-dom";
+import { pugilistLevelUp } from "../skills/levelUp";
+
+
 import {pugilist, Monk, Fighter} from "../skills/skills.js"
 import JobConf from '../components/JobConf';
 
@@ -11,20 +17,24 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/button';
 import Stack from 'react-bootstrap/Stack';
 
-function Pugilist() {
-  const [level, setLevel] = useState(29)
+function Pugilist({character}) {
+  const baseStats = character.stats[0]
+  const {id: characterId} = useParams()
+  const [mutateChar, {error: stat}] = useMutation(LEVEL_UP)
+  const [level, setLevel] = useState(character.stats[0].level)
   const [job, setJob] = useState(pugilist)
-  const [jobName, setJobName] = useState('Pugilist')
+  const [jobName, setJobName] = useState(character.class)
   const [show, setShow] = useState(false)
   const [combat, setCombat] = useState(false)
   const [newLevel, setNewLevel] = useState(level)
-  const [maxXp, setMaxXp] = useState(0)
+  const [maxXp, setMaxXp] = useState(baseStats.experience)
   const [exp, setExp] = useState("")
   const [tempXp, setTempXp] = useState("")
   const [percent, setPercent] = useState("")
   const [pickJob, setPickJob] = useState(false)
   useEffect(() => {
-      let levelUp = Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
+      const getExp = window.localStorage.getItem('maxExp')
+      let levelUp = Number(getExp) + Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
       setMaxXp(levelUp)
   }, [newLevel])
   const levelUp = () => {
@@ -32,25 +42,34 @@ function Pugilist() {
       if(levels == 30){
         setPickJob(true)
       }
+      window.localStorage.setItem('maxExp', maxXp)
       setNewLevel(levels)
       setExp(0)
       setPercent(0)
+      if(character.class == "Pugilist"){
+        pugilistLevelUp({baseStats, mutateChar, characterId, levels, maxXp})
+      }if(character.class == "Monk"){
+        monkLevelUp()
+      }else{
+        fighterLevelUp()
+      }
   }
   const addXp = (xp) => {
       let percentage = Number(percent) + ((Number(xp)/maxXp) * 100)
       setPercent(percentage)
       setExp(Number(exp) + Number(xp))
+      window.localStorage.setItem('maxExp', xp)
       setTempXp("")
   }
   return (
     <div className='inside'>
       <div>
         <div className='character'>
-          <Character props={job} />
+          <Character props={job} character={character}/>
         </div>
         <div className='stats'>
-          <Stats />
-          <Hits />
+          <Stats character={character}/>
+          <Hits character={character}/>
         </div>
         <Stack direction='vertical' gap={3}>
         <ProgressBar now={percent} animated variant="info" striped label={`${exp}  / ${maxXp}xp`} />

@@ -36,6 +36,7 @@ import Pugilist from './classes/Pugilist'
 import Signup from './userPages/Signup';
 import Profile from './userPages/Profile';
 import CreateCharacter from './userPages/CreateCharacter';
+import Loading from './userPages/Loading';
 /* 
 updates:
   need database
@@ -51,11 +52,11 @@ function App() {
         <div>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route exact path="/login" element={<Signup />} />
+            <Route exact path="/login" component={Signup} />
             <Route exact path='/profile' component={Profile}/>
             <Route exact path='/create' component={CreateCharacter}/>
             <Route exact path='/arcanist' component={Arcanist}/>
-            <Route exact path='/sorcerer/:id' component={Sorcerer }/>
+            <Route exact path='/loading/:id' component={Loading }/>
 
             <Route path='*' component={NotFound} />
           </Switch>

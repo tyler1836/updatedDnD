@@ -45,4 +45,13 @@ mutation($characterId: ID!, $strength: Int, $dexterity: Int, $constitution: Int,
   addStats(characterId: $characterId, strength: $strength, dexterity: $dexterity, constitution: $constitution, intelligence: $intelligence, wisdom: $wisdom, charisma: $charisma, perception: $perception, health: $health, level: $level, speed: $speed, initiative: $initiative, armor: $armor) {
     strength
   }
-}`
+}
+`
+
+export const LEVEL_UP = gql`
+mutation($characterId: ID!, $statId: ID!, $strength: Int, $dexterity: Int, $intelligence: Int, $wisdom: Int, $constitution: Int, $perception: Int, $charisma: Int, $health: Int, $level: Int, $experience: Int, $speed: Int) {
+  levelUp(characterId: $characterId, statId: $statId, strength: $strength, dexterity: $dexterity, intelligence: $intelligence, wisdom: $wisdom, constitution: $constitution, perception: $perception, charisma: $charisma, health: $health, level: $level, experience: $experience, speed: $speed) {
+    _id
+  }
+}
+`

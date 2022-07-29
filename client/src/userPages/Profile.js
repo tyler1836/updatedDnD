@@ -83,9 +83,9 @@ function Profile() {
         {user.characters.map((character, index) => {
           console.log(character.stats);
           return (
-            <div className="characterList" id={character._id} key={character._id} onClick={() => window.location.assign(`/${character.class}/${character._id}`)}>
+            <div className="characterList" id={character._id} key={character._id} >
               <div>
-                <h5>{character.name}</h5>
+                <h5 onClick={() => window.location.assign(`/loading/${character._id}`)}>{character.name}</h5>
               </div>
               <div>
                 <h6>Race: {character.race}</h6>

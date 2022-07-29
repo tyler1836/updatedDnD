@@ -25,8 +25,7 @@ query character($id: ID!) {
   character(_id: $id) {
     name
     stats {
-      proficiency
-      inspiration
+      _id
       strength
       dexterity
       constitution
@@ -34,11 +33,10 @@ query character($id: ID!) {
       wisdom
       charisma
       perception
-      armor
       health
       speed
-      initiative
       level
+      experience
     }
     alignment
     background
