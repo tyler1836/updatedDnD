@@ -1981,7 +1981,7 @@ export const Assassin = [
     }
 ]
 
-export const Archer = [
+export const archer = [
     {
         name: "Quick Nock",
         dice: `[1d6] Uses: Unlimited`,

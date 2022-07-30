@@ -10,7 +10,6 @@ type Character {
   equipment: [Equipment]
   # 
   class: String
-  experience: Int
   race: String
   alignment: String
   background: String
@@ -18,8 +17,6 @@ type Character {
 }
 type Stat{
     _id: ID
-    proficiency: Int 
-    inspiration: Int 
     strength: Int
     dexterity: Int
     constitution: Int
@@ -27,11 +24,10 @@ type Stat{
     wisdom: Int
     charisma: Int
     perception: Int
-    armor: Int 
-    initiative: Int 
     speed: Int
     health: Int 
     level: Int 
+    experience: Int
 }
 type Personality{
     _id: ID
@@ -100,8 +96,6 @@ type Mutation {
   ): Character
   addStats(
     characterId: ID!
-    proficiency: Int
-    inspiration: Int
     strength: Int
     dexterity: Int
     constitution: Int
@@ -109,11 +103,10 @@ type Mutation {
     wisdom: Int
     charisma: Int
     perception: Int
-    armor: Int 
-    initiative: Int 
     speed: Int
     health: Int 
     level: Int
+    experience: Int
     ): Stat
   addPersonality(
     characterId: ID!
@@ -130,4 +123,19 @@ type Mutation {
     type: String!
     definition: String!
   ): Equipment
+  levelUp(
+    characterId: ID!
+    statId: ID!
+    strength: Int
+    dexterity: Int
+    constitution: Int
+    intelligence: Int
+    wisdom: Int
+    charisma: Int
+    perception: Int
+    health: Int 
+    level: Int
+    experience: Int
+    speed: Int
+  ): Stat
 }`

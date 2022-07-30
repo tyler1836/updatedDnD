@@ -11,7 +11,7 @@ function Signup() {
   const [login, setLogin] = useState({email: "", password: ""})
   const [createUser, setCreateUser] = useState({email: "", username: "", password: ""})
   const [loginUser, ] = useMutation(LOGIN_USER);
-  const [addUser, { signup: error }] = useMutation(ADD_USER);
+  const [addUser, { error: signupError }] = useMutation(ADD_USER);
 
   const loginChange = (event) => {
     const {name, value} = event.target

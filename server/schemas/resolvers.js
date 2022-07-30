@@ -52,9 +52,9 @@ const resolvers = {
             return char
         },
         characters: async (parent, args, context) => {
-            if(context.user){
-            const char = await Character.find().populate('stats')
-            return char
+            if (context.user) {
+                const char = await Character.find().populate('stats')
+                return char
             }
 
             throw new AuthenticationError('Please log in!')
@@ -99,15 +99,13 @@ const resolvers = {
 
             throw new AuthenticationError('You need to be logged in!');
         },
-        deleteCharacter: async (parent, {characterId}) => {
+        deleteCharacter: async (parent, { characterId }) => {
             const char = await Character.findByIdAndDelete(characterId)
             return char
         },
         //destructure args so characterid isnt passed as a stat
         addStats: async (parent, {
             characterId,
-            proficiency,
-            inspiration,
             strength,
             dexterity,
             constitution,
@@ -115,16 +113,13 @@ const resolvers = {
             wisdom,
             charisma,
             perception,
-            armor,
-            initiative,
             speed,
             health,
-            level
+            level, 
+            experience
         }) => {
-            
+
             const stat = await Stats.create({
-                proficiency,
-                inspiration,
                 strength,
                 dexterity,
                 constitution,
@@ -132,11 +127,10 @@ const resolvers = {
                 wisdom,
                 charisma,
                 perception,
-                armor,
-                initiative,
                 speed,
                 health,
-                level
+                level,
+                experience
             })
             const character = await Character.findByIdAndUpdate(
                 { _id: characterId },
@@ -191,6 +185,45 @@ const resolvers = {
             )
             return character
         },
+        levelUp: async (parent, {
+            characterId,
+            statId,
+            strength,
+            dexterity,
+            constitution,
+            intelligence,
+            wisdom,
+            charisma,
+            perception,
+            health,
+            level,
+            experience,
+            speed
+        }) => {
+            const stats = await Stats.findByIdAndUpdate(
+                {_id: statId},
+                {
+                strength: strength,
+                dexterity: dexterity,
+                constitution: constitution,
+                intelligence: intelligence,
+                wisdom: wisdom,
+                charisma: charisma,
+                perception: perception,
+                health: health,
+                speed: speed,
+                level: level,
+                experience: experience
+                },
+                {new: true}
+            )
+            const char = await Character.findByIdAndUpdate(
+                {_id: characterId},
+                {$push: {stats: stats}},
+                {new: true}
+            )
+            return {char, stats}
+        }
     }
 }
 

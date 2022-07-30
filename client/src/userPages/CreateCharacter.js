@@ -76,11 +76,9 @@ function CreateCharacter() {
         <h3>Finally a background for your character</h3>
         <input type="text" placeholder='background' name='background' value={character.background} onChange={handleCharChange}/>
       </form>
-      <Button variant="success" type="submit" onClick={handleCharSubmit}>Submit</Button>
-      <h2>Lets role stats</h2>
-      <form action="">
-        
-      </form>
+      <Button variant="success" type="submit" onClick={() => {
+        handleCharSubmit()
+      }}>Submit</Button>
     </div>
   )
 }

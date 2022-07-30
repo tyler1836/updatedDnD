@@ -1,8 +1,6 @@
 import {React, useState, useEffect} from "react";
 import { RedMage, sorcerer, WhiteMage, BlackMage} from "../skills/skills.js"
-import {useQuery} from '@apollo/client'
-import { QUERY_CHARACTER } from "../utils/queries.js";
-import { useParams } from 'react-router-dom';
+
 
 
 import JobConf from '../components/JobConf';
