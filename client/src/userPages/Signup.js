@@ -9,7 +9,7 @@ import Auth from '../utils/auth'
 
 function Signup() {
   const [login, setLogin] = useState({email: "", password: ""})
-  const [createUser, setCreateUser] = useState({email: "", username: "", password: ""})
+  const [createUser, setCreateUser] = useState({email: "", username: "", password: "", isGm: false})
   const [loginUser, ] = useMutation(LOGIN_USER);
   const [addUser, { error: signupError }] = useMutation(ADD_USER);
 
@@ -104,7 +104,7 @@ function Signup() {
           <Form.Control type="password" placeholder="Password" name='password' value={createUser.password} onChange={handleChange}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Are you a DM/GM" />
+          <Form.Check type="checkbox" label="Are you a DM/GM" checked={createUser.isGm = true}/>
         </Form.Group>
         <Button variant="secondary" type="submit" onClick={handleCreateUser}>
           Submit

@@ -30,9 +30,6 @@ const client = new ApolloClient({
 import Header from './userPages/Header'
 import Home from './userPages/Home'
 import NotFound from './userPages/NotFound'
-import Sorcerer from './classes/Sorcerer'
-import Arcanist from './classes/Arcanist'
-import Pugilist from './classes/Pugilist'
 import Signup from './userPages/Signup';
 import Profile from './userPages/Profile';
 import CreateCharacter from './userPages/CreateCharacter';
@@ -55,7 +52,6 @@ function App() {
             <Route exact path="/login" component={Signup} />
             <Route exact path='/profile' component={Profile}/>
             <Route exact path='/create' component={CreateCharacter}/>
-            <Route exact path='/arcanist' component={Arcanist}/>
             <Route exact path='/loading/:id' component={Loading }/>
 
             <Route path='*' component={NotFound} />

@@ -1,6 +1,8 @@
-import {React, useState, useEffect} from "react";
-import { RedMage, sorcerer, WhiteMage, BlackMage} from "../skills/skills.js"
-
+import { React, useState, useEffect } from "react";
+import { RedMage, sorcerer, WhiteMage, BlackMage } from "../skills/skills.js"
+import { useMutation } from "@apollo/client";
+import { LEVEL_UP } from '../utils/mutations'
+import { useParams } from "react-router-dom";
 
 
 import JobConf from '../components/JobConf';
@@ -13,85 +15,111 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/button';
 import Stack from 'react-bootstrap/Stack';
 
-function Sorcerer() {
-  const {id: characterId} = useParams()
-  const {loading, data, error} = useQuery(QUERY_CHARACTER, {
-    variables: {id: characterId}
-  })
-  const character = data?.character || []
-  console.log(character);
-  const [level, setLevel] = useState(character?.stats[0].level || 10)
+function Sorcerer({ character }) {
+  const baseStats = character.stats[0]
+  const { id: characterId } = useParams()
+  const [mutateChar, { error: stat }] = useMutation(LEVEL_UP)
+  const [level, setLevel] = useState(character.stats[0].level)
   const [job, setJob] = useState(sorcerer)
-  const [jobName, setJobName] = useState(character?.class || "")
+  const [jobName, setJobName] = useState(character.class)
   const [show, setShow] = useState(false)
   const [combat, setCombat] = useState(false)
   const [newLevel, setNewLevel] = useState(level)
-  const [maxXp, setMaxXp] = useState(0)
+  const [maxXp, setMaxXp] = useState(baseStats.experience)
   const [exp, setExp] = useState("")
   const [tempXp, setTempXp] = useState("")
   const [percent, setPercent] = useState("")
   const [pickJob, setPickJob] = useState(false)
-
   useEffect(() => {
-      let levelUp = Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
-      setMaxXp(levelUp)
+    if (window.localStorage.key('maxExp')) {
+      let getMaxExp = window.localStorage.getItem('maxExp')
+      setMaxXp(Number(getMaxExp))
+    }
+    if (!window.localStorage.getItem('maxExp')) {
+      let randomXP = maxXp + Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
+      setMaxXp(randomXP)
+      console.log('hello')
+      window.localStorage.setItem('maxExp', randomXP)
+    }
+    if (window.localStorage.key('tempExp')) {
+      let getExp = window.localStorage.getItem('tempExp')
+      setExp(getExp)
+      if (!window.localStorage.getItem('maxExp')) {
+        let percentage = ((Number(getExp) / randomXP) * 100)
+        setPercent(percentage)
+      } else {
+        let getMaxExp = window.localStorage.getItem('maxExp')
+        let percentage = ((Number(getExp) / getMaxExp) * 100)
+        console.log(`${maxXp} & ${percentage} & ${getExp}`)
+        setPercent(percentage)
+      }
+    }
   }, [newLevel])
   const levelUp = () => {
-      let levels = newLevel + 1
-      if(levels == 30){
-        setPickJob(true)
-      }
-      setNewLevel(levels)
-      setExp(0)
-      setPercent(0)
+    let levels = newLevel + 1
+    if (levels == 30) {
+      setPickJob(true)
+    }
+    setNewLevel(levels)
+    setExp(0)
+    setPercent(0)
+    window.localStorage.removeItem('tempExp')
+    window.localStorage.removeItem('maxExp')
+    if (character.class == "Pugilist") {
+      pugilistLevelUp({ baseStats, mutateChar, characterId, levels, maxXp })
+    } if (character.class == "Monk") {
+      monkLevelUp()
+    } else {
+      fighterLevelUp()
+    }
   }
   const addXp = (xp) => {
-      let percentage = Number(percent) + ((Number(xp)/maxXp) * 100)
-      setPercent(percentage)
-      setExp(Number(exp) + Number(xp))
-      setTempXp("")
-  }
-  if(loading){
-    return <div>Loading...</div>
+    let percentage = Number(percent) + ((Number(xp) / maxXp) * 100)
+    setPercent(percentage)
+    setExp(Number(exp) + Number(xp))
+    let getExp = window.localStorage.getItem('tempExp')
+    let temporary = (Number(tempXp) + Number(getExp))
+    window.localStorage.setItem('tempExp', temporary)
+    setTempXp("")
   }
   return (
     <div className='inside'>
       <div>
         <div className='character'>
-          <Character props={job} character={character}/>
+          <Character props={job} character={character} />
         </div>
         <div className='stats'>
-          <Stats character={character}/>
-          <Hits character={character}/>
+          <Stats character={character} />
+          <Hits character={character} />
         </div>
         <Stack direction='vertical' gap={3}>
-        <ProgressBar now={percent} animated variant="info" striped label={`${exp}  / ${maxXp}xp`} />
-            <p>{`${maxXp}`}</p>
-            <input type="text" name='xp' value={tempXp} onChange={() => setTempXp(event.target.value)} />
-            <label htmlFor="xp"></label>
-            <Button onClick={() => addXp(tempXp)} size="md" variant='dark' disabled={(Number(exp) >= maxXp)}>Add XP</Button>
-            <Button onClick={() => levelUp()} disabled={(newLevel == 50) || (Number(exp) < maxXp) || pickJob} variant="warning">{(newLevel == 50) ? "Max Level" : "Level Up"} </Button>
+          <ProgressBar now={percent} animated variant="info" striped label={`${exp}  / ${maxXp}xp`} />
+          <p>{`${maxXp}`}</p>
+          <input type="text" name='xp' value={tempXp} onChange={() => setTempXp(event.target.value)} />
+          <label htmlFor="xp"></label>
+          <Button onClick={() => addXp(tempXp)} size="md" variant='dark' disabled={(Number(exp) >= maxXp)}>Add XP</Button>
+          <Button onClick={() => levelUp()} disabled={(newLevel == 50) || (Number(exp) < maxXp) || pickJob} variant="warning">{(newLevel == 50) ? "Max Level" : "Level Up"} </Button>
           <Button onClick={() => setCombat(!combat)}>Show/Hide Skills</Button>
           {(combat) ? <Tables props={job} level={newLevel} /> : ''}
         </Stack>
-       
-      <JobConf
-        show={show}
-        onHide={() => setShow(false)}
-        job={job}
-        jobName={jobName}
-        reset={() => {setJobName('Sorcerer'), setJob(sorcerer)}}
-        selected={()=> setPickJob(false)}
-        info={(jobName == 'White Mage') ? "healer" : (jobName == "Black Mage") ? "Damage" : "Utility"}
-      />
-        {(pickJob) ? 
-        <div className='jobs'>
-        <Button variant='light' onClick={() => {setShow(!show), setJobName('White Mage'), setJob(WhiteMage)}} disabled={(jobName == 'White Mage')}>Choose White Mage</Button>
-        <Button variant='dark' onClick={() => {setShow(!show), setJobName('Black Mage'), setJob(BlackMage)}} disabled={(jobName == 'Black Mage')}>Choose Black Mage</Button> 
-        <Button variant='danger' onClick={() => {setShow(!show), setJobName('Red Mage'), setJob(RedMage)}} disabled={(jobName == 'Red Mage')}>Choose Red Mage</Button> 
-        </div>
-        : ''}
-        <Bag 
+
+        <JobConf
+          show={show}
+          onHide={() => setShow(false)}
+          job={job}
+          jobName={jobName}
+          reset={() => { setJobName('Sorcerer'), setJob(sorcerer) }}
+          selected={() => setPickJob(false)}
+          info={(jobName == 'White Mage') ? "healer" : (jobName == "Black Mage") ? "Damage" : "Utility"}
+        />
+        {(pickJob) ?
+          <div className='jobs'>
+            <Button variant='light' onClick={() => { setShow(!show), setJobName('White Mage'), setJob(WhiteMage) }} disabled={(jobName == 'White Mage')}>Choose White Mage</Button>
+            <Button variant='dark' onClick={() => { setShow(!show), setJobName('Black Mage'), setJob(BlackMage) }} disabled={(jobName == 'Black Mage')}>Choose Black Mage</Button>
+            <Button variant='danger' onClick={() => { setShow(!show), setJobName('Red Mage'), setJob(RedMage) }} disabled={(jobName == 'Red Mage')}>Choose Red Mage</Button>
+          </div>
+          : ''}
+        <Bag
         />
       </div>
     </div>

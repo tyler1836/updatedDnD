@@ -16,7 +16,7 @@ function CreateCharacter() {
     })
   }
   const handleCharSubmit = async (event) => {
-    event.preventDefault()
+    //event.preventDefault()
     try{
       const {data} = await createChar({
         variables: {...character}
@@ -32,6 +32,7 @@ function CreateCharacter() {
       alert(e)
       console.error(e)
     }
+    window.location.assign('/profile')
   }
   return (
     <div className='characterCreate'>

@@ -37,6 +37,7 @@ query character($id: ID!) {
       speed
       level
       experience
+      tempExp
     }
     alignment
     background

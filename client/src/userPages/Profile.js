@@ -23,8 +23,7 @@ function Profile() {
     health: "",
     level: 1,
     speed: 15,
-    initiative: 10,
-    armor: 10
+
   })
   const { loading, data } = useQuery(QUERY_ME)
   const [deleteCharacter, { error }] = useMutation(DELETE_CHARACTER)
@@ -59,9 +58,8 @@ function Profile() {
         health: "",
         level: 1,
         speed: '15',
-        initiative: 10,
-        armor: 10
       })
+      window.location.reload()
     }catch(e){
       console.log(e);
     }
@@ -85,7 +83,7 @@ function Profile() {
           return (
             <div className="characterList" id={character._id} key={character._id} >
               <div>
-                <h5 onClick={() => window.location.assign(`/loading/${character._id}`)}>{character.name}</h5>
+                <h5 onClick={() => window.location.assign(`/loading/${character._id}`)} className='characterName'>{character.name}</h5>
               </div>
               <div>
                 <h6>Race: {character.race}</h6>
@@ -114,7 +112,8 @@ function Profile() {
                     <input type="text" placeholder={'health roll 2d6'} name='health' value={createStats.health} onChange={handleChange} />
                     <button onClick={() => {
                       setCreateStats({...createStats, characterId: character._id})
-                      handleAddStats()}}>Add</button>
+                      handleAddStats()
+                      }}>Add</button>
                 </div> : ""}
               </div>
               {/*  add stats button passing id in */}

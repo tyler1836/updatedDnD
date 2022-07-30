@@ -198,7 +198,8 @@ const resolvers = {
             health,
             level,
             experience,
-            speed
+            speed,
+            tempExp
         }) => {
             const stats = await Stats.findByIdAndUpdate(
                 {_id: statId},
@@ -213,12 +214,14 @@ const resolvers = {
                 health: health,
                 speed: speed,
                 level: level,
-                experience: experience
+                experience: experience,
+                tempExp: tempExp
                 },
                 {new: true}
             )
             const char = await Character.findByIdAndUpdate(
                 {_id: characterId},
+                {$pull: {stats}},
                 {$push: {stats: stats}},
                 {new: true}
             )

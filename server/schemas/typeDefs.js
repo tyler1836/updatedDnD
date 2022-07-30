@@ -28,6 +28,7 @@ type Stat{
     health: Int 
     level: Int 
     experience: Int
+    tempExp: Int
 }
 type Personality{
     _id: ID
@@ -137,5 +138,6 @@ type Mutation {
     level: Int
     experience: Int
     speed: Int
+    tempExp: Int
   ): Stat
 }`

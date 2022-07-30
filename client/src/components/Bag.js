@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 function Bag() {
   const [bag, setBag] = useState({item: "", type: "", description: "" })
   let bagItems = {}
-  console.log(bagItems);
   const handleChange = (event) => {
     const {name, value} = event.target
 
