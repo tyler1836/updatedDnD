@@ -46,7 +46,6 @@ function Soldier({ character }) {
     setExp(0)
     setPercent(0)
     if (character.class == "Soldier") {
-      console.log('calling soldier')
       await soldierLevelUp({ baseStats, mutateChar, characterId, levels, randomXP })
     } if (character.class == "Berserker") {
       berserkerLevelUp({ baseStats, mutateChar, characterId, levels, maxXp })
