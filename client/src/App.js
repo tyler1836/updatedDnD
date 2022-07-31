@@ -52,7 +52,7 @@ function App() {
             <Route exact path="/login" component={Signup} />
             <Route exact path='/profile' component={Profile}/>
             <Route exact path='/create' component={CreateCharacter}/>
-            <Route exact path='/loading' component={Loading }/>
+            <Route exact path='/loading/:id' component={Loading }/>
 
             <Route path='*' component={NotFound} />
           </Switch>
