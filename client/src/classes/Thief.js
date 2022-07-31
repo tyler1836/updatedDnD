@@ -12,7 +12,7 @@ import Character from '../components/Character'
 import Stats from '../components/Stats';
 import Hits from '../components/Hits';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import Button from 'react-bootstrap/button';
+import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
 function Thief({ character }) {
