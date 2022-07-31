@@ -44,7 +44,6 @@ const resolvers = {
             throw new AuthenticationError('Please log in!')
         },
         character: async (parent, args) => {
-            console.log('stupid')
             const char = await Character.findById({ _id: args._id })
                 .populate('stats')
                 .populate('personality')
@@ -101,6 +100,14 @@ const resolvers = {
         },
         deleteCharacter: async (parent, { characterId }) => {
             const char = await Character.findByIdAndDelete(characterId)
+            return char
+        },
+        updateClass: async (parent, args) => {
+            const char = await Character.findByIdAndUpdate(
+                {_id: args.characterId},
+                {class: args.class },
+                {new: true}
+            )
             return char
         },
         //destructure args so characterid isnt passed as a stat
@@ -184,6 +191,16 @@ const resolvers = {
                 { new: true }
             )
             return character
+        },
+        deleteEquipment: async (parent, args) => {
+            const item = await Equipment.findById({_id: args.equipmentId})
+            const char = await Character.findByIdAndUpdate(
+                {_id: args.characterId},
+                {$pull: {equipment: item._id}},
+                {new: true}
+                )
+            const deleteItem = await Equipment.findByIdAndDelete({_id: args.equipmentId})
+            return {char}
         },
         levelUp: async (parent, {
             characterId,

@@ -61,7 +61,8 @@ function Hits({character}) {
                     </div></div>
                 <div className="hardStats">
                     <div>
-                        <p>Speed/Movement</p>
+                        <p>Speed /
+                        Movement</p>
                     </div>
                     <div>
                         <GiLeatherBoot style={{ fontSize: 60, color: "brown" }} />

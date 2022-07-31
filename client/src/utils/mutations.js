@@ -40,6 +40,15 @@ export const DELETE_CHARACTER = gql`
 }
 `
 
+export const UPDATE_CLASS = gql`
+mutation($characterId: ID!, $class: String!) {
+  updateClass(characterId: $characterId, class: $class) {
+    name
+    class
+  }
+}
+`
+
 export const ADD_STATS = gql`
 mutation($characterId: ID!, $strength: Int, $dexterity: Int, $constitution: Int, $intelligence: Int, $wisdom: Int, $charisma: Int, $perception: Int, $health: Int, $level: Int, $speed: Int, ) {
   addStats(characterId: $characterId, strength: $strength, dexterity: $dexterity, constitution: $constitution, intelligence: $intelligence, wisdom: $wisdom, charisma: $charisma, perception: $perception, health: $health, level: $level, speed: $speed) {
@@ -51,6 +60,23 @@ mutation($characterId: ID!, $strength: Int, $dexterity: Int, $constitution: Int,
 export const LEVEL_UP = gql`
 mutation($characterId: ID!, $statId: ID!, $strength: Int, $dexterity: Int, $intelligence: Int, $wisdom: Int, $constitution: Int, $perception: Int, $charisma: Int, $health: Int, $level: Int, $experience: Int, $speed: Int, $tempExp: Int) {
   levelUp(characterId: $characterId, statId: $statId, strength: $strength, dexterity: $dexterity, intelligence: $intelligence, wisdom: $wisdom, constitution: $constitution, perception: $perception, charisma: $charisma, health: $health, level: $level, experience: $experience, tempExp: $tempExp, speed: $speed) {
+    _id
+  }
+}
+`
+
+export const ADD_EQUIPMENT = gql`
+mutation($characterId: ID!, $name: String!, $type: String!, $definition: String!) {
+  addEquipment(characterId: $characterId, name: $name, type: $type, definition: $definition) {
+    _id
+    name
+  }
+}
+`
+
+export const DELETE_EQUIPMENT = gql`
+mutation($characterId: ID!, $equipmentId: ID!) {
+  deleteEquipment(characterId: $characterId, equipmentId: $equipmentId) {
     _id
   }
 }

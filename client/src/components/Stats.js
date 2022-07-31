@@ -6,6 +6,7 @@ import {GiMuscleUp, GiBlackHandShield, GiShiningHeart, GiSpellBook, GiOpenBook, 
 
 function Stats({character}) {
   const stats = character.stats[0]
+  const [show, setShow] = useState(false)
   const [bonuses, setBonuses] = useState({
     athletics: 0,
     acrobatics: 0,
@@ -182,8 +183,11 @@ function Stats({character}) {
     areBonused()
   }, [])
   return (
+    <div >
+      <button onClick={() => setShow(!show)} className='showBtn'>{show ? 'Hide Proficiencies' : 'Show Proficiencies'}</button>
+    {show ? 
     <div className='largeStats'>
-    <Tab.Container id="list-group-secondary" defaultActiveKey=''>
+    <Tab.Container id="list-group-secondary" defaultActiveKey='' >
     <ListGroup>
     <ListGroup.Item >Melee Proficiency Bonus {Math.floor((stats.strength + stats.dexterity) * .7)}{/*db stats */}</ListGroup.Item>
     <ListGroup.Item >Ranged Proficiency Bonus {Math.floor((stats.intelligence + stats.perception) * .7)}{/*db stats */}</ListGroup.Item>
@@ -235,6 +239,8 @@ function Stats({character}) {
     </Tab.Pane>
   </Tab.Content>
   </Tab.Container>
+  </div>
+  : ""}
   </div>
   )
 }

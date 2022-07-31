@@ -4,6 +4,7 @@ import { useQuery, useMutation } from '@apollo/client'
 import { QUERY_ME } from '../utils/queries'
 import { DELETE_CHARACTER, ADD_STATS } from '../utils/mutations'
 import { FaRegTrashAlt } from 'react-icons/fa'
+import {FiEdit} from 'react-icons/fi'
 
 
 
@@ -99,7 +100,8 @@ function Profile() {
                     setId(character._id)
                   }}>Add Stats</button> : <h6>Level: {character.stats[0].level}</h6>
                 }
-                <h6><FaRegTrashAlt onClick={() => destroyChar(character._id)} /></h6>
+                <h6><FaRegTrashAlt style={{color:'red'}} onClick={() => destroyChar(character._id)} /></h6>
+                <FiEdit style={{color:'green'}}/>
               {(showStats && (character.stats.length <= 0)) ?
                 <div>
                     <input type="text" placeholder={'strength roll 2d6'} name='strength' value={createStats.strength} onChange={handleChange} />
@@ -116,11 +118,9 @@ function Profile() {
                       }}>Add</button>
                 </div> : ""}
               </div>
-              {/*  add stats button passing id in */}
             </div>
           )
         })}
-        {/* <AddStats show={showStats} onHide={() => setShowStats(false)} character={user.characters[characterIndex]} change={() => handleChange(event)} createStats={createStats}/> */}
       </div>
     </div>
   )

@@ -1,8 +1,19 @@
+import { useMutation } from '@apollo/client';
+import { UPDATE_CLASS } from '../utils/mutations';
+import { useParams } from 'react-router-dom';
+
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 
 function JobConf(props) {
+  const {id: characterId} = useParams()
+  const [updateClass, {error}] = useMutation(UPDATE_CLASS)
+  const classReassign = async (args) => {
+    await updateClass({
+      variables: {characterId: characterId, class: props.jobName}
+    })
+  }
 
   return (
     <Modal
@@ -28,6 +39,7 @@ function JobConf(props) {
         }}>Close
         </Button>
         <Button onClick={()=> {
+            classReassign(),
             props.onHide(),
             props.selected()
         }}>Proceed</Button>

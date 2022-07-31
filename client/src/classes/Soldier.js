@@ -13,6 +13,7 @@ import Hits from '../components/Hits';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/button';
 import Stack from 'react-bootstrap/Stack';
+import { darkknightLevelUp, soldierLevelUp, paladinLevelUp, berserkerLevelUp } from "../skills/levelUp.js";
 
 function Soldier({ character }) {
   const baseStats = character.stats[0]
@@ -34,20 +35,25 @@ function Soldier({ character }) {
      setPercent(percentage)
      
   }, [])
-  const levelUp = () => {
+  const levelUp = async () => {
     let levels = newLevel + 1
     if (levels == 30) {
       setPickJob(true)
     }
+    let randomXP = maxXp + Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
+    setMaxXp(randomXP)
     setNewLevel(levels)
     setExp(0)
     setPercent(0)
-    if (character.class == "Pugilist") {
-      pugilistLevelUp({ baseStats, mutateChar, characterId, levels, maxXp })
-    } if (character.class == "Monk") {
-      monkLevelUp()
-    } else {
-      fighterLevelUp()
+    if (character.class == "Soldier") {
+      console.log('calling soldier')
+      await soldierLevelUp({ baseStats, mutateChar, characterId, levels, randomXP })
+    } if (character.class == "Berserker") {
+      berserkerLevelUp({ baseStats, mutateChar, characterId, levels, maxXp })
+    } if (character.class == "Paladin") {
+      paladinLevelUp({ baseStats, mutateChar, characterId, levels, maxXp })
+    }else{
+      darkknightLevelUp({ baseStats, mutateChar, characterId, levels, maxXp })
     }
   }
   const addXp = async (xp) => {
@@ -102,16 +108,18 @@ function Soldier({ character }) {
           jobName={jobName}
           reset={() => { setJobName('Soldier'), setJob(soldier) }}
           selected={() => setPickJob(false)}
-          info={(jobName == 'Berserker') ? "Tanking" : (jobName == "Paladin") ? "Tanking" : "Tanking"}
+          info={(jobName == 'Berserker') ? "A master of rage. You've been able to harness the anger inside of you to make you a near impenetrable walking fortress." 
+          : (jobName == "Paladin") ? "Picked up as a member of the Holy Guard straight from military academy. You wield the power and blessings of this lands God." 
+          : "You have succumbed to the darkness that lives in us all, but you have learned to wield it as a powerful force. Now death, blood, and darkness are a boon."}
         />
         {(pickJob) ?
           <div className='jobs'>
-            <Button variant='primary' onClick={() => { setShow(!show), setJobName('Berserker'), setJob(Berserker) }} disabled={(jobName == 'Berserker')}>Choose Berserker</Button>
+            <Button variant='danger' onClick={() => { setShow(!show), setJobName('Berserker'), setJob(Berserker) }} disabled={(jobName == 'Berserker')}>Choose Berserker</Button>
             <Button variant='light' onClick={() => { setShow(!show), setJobName("Paladin"), setJob(Paladin) }} disabled={(jobName == "Paladin")}>Choose Paladin</Button>
             <Button variant='dark' onClick={() => { setShow(!show), setJobName('Dark Knight'), setJob(DarkKnight) }} disabled={(jobName == 'Dark Knight')}>Choose Dark Knight</Button>
           </div>
           : ''}
-        <Bag
+        <Bag character={character}
         />
       </div>
     </div>

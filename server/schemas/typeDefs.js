@@ -41,9 +41,9 @@ type Personality{
 }
 type Equipment{
     _id: ID
-    name: String!
-    type: String!
-    definition: String!
+    name: String
+    type: String
+    definition: String
 }
 type User {
   _id: ID
@@ -95,6 +95,10 @@ type Mutation {
   deleteCharacter(
     characterId: ID!
   ): Character
+  updateClass(
+    characterId: ID!
+    class: String!
+  ): Character
   addStats(
     characterId: ID!
     strength: Int
@@ -123,6 +127,10 @@ type Mutation {
     name: String!
     type: String!
     definition: String!
+  ): Equipment
+  deleteEquipment(
+    characterId: ID!
+    equipmentId: ID!
   ): Equipment
   levelUp(
     characterId: ID!
