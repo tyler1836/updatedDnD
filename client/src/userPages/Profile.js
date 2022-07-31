@@ -4,6 +4,7 @@ import { useQuery, useMutation } from '@apollo/client'
 import { QUERY_ME } from '../utils/queries'
 import { DELETE_CHARACTER, ADD_STATS } from '../utils/mutations'
 import { FaRegTrashAlt } from 'react-icons/fa'
+import {FiEdit} from 'react-icons/fi'
 
 
 
@@ -23,8 +24,7 @@ function Profile() {
     health: "",
     level: 1,
     speed: 15,
-    initiative: 10,
-    armor: 10
+
   })
   const { loading, data } = useQuery(QUERY_ME)
   const [deleteCharacter, { error }] = useMutation(DELETE_CHARACTER)
@@ -59,9 +59,8 @@ function Profile() {
         health: "",
         level: 1,
         speed: '15',
-        initiative: 10,
-        armor: 10
       })
+      window.location.reload()
     }catch(e){
       console.log(e);
     }
@@ -85,7 +84,7 @@ function Profile() {
           return (
             <div className="characterList" id={character._id} key={character._id} >
               <div>
-                <h5 onClick={() => window.location.assign(`/loading/${character._id}`)}>{character.name}</h5>
+                <h5 onClick={() => window.location.assign(`/loading/${character._id}`)} className='characterName'>{character.name}</h5>
               </div>
               <div>
                 <h6>Race: {character.race}</h6>
@@ -101,7 +100,8 @@ function Profile() {
                     setId(character._id)
                   }}>Add Stats</button> : <h6>Level: {character.stats[0].level}</h6>
                 }
-                <h6><FaRegTrashAlt onClick={() => destroyChar(character._id)} /></h6>
+                <h6><FaRegTrashAlt style={{color:'red'}} onClick={() => destroyChar(character._id)} /></h6>
+                <FiEdit style={{color:'green'}}/>
               {(showStats && (character.stats.length <= 0)) ?
                 <div>
                     <input type="text" placeholder={'strength roll 2d6'} name='strength' value={createStats.strength} onChange={handleChange} />
@@ -114,14 +114,13 @@ function Profile() {
                     <input type="text" placeholder={'health roll 2d6'} name='health' value={createStats.health} onChange={handleChange} />
                     <button onClick={() => {
                       setCreateStats({...createStats, characterId: character._id})
-                      handleAddStats()}}>Add</button>
+                      handleAddStats()
+                      }}>Add</button>
                 </div> : ""}
               </div>
-              {/*  add stats button passing id in */}
             </div>
           )
         })}
-        {/* <AddStats show={showStats} onHide={() => setShowStats(false)} character={user.characters[characterIndex]} change={() => handleChange(event)} createStats={createStats}/> */}
       </div>
     </div>
   )

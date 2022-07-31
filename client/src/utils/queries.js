@@ -24,6 +24,10 @@ export const QUERY_CHARACTER = gql`
 query character($id: ID!) {
   character(_id: $id) {
     name
+    alignment
+    background
+    class
+    race
     stats {
       _id
       strength
@@ -37,11 +41,22 @@ query character($id: ID!) {
       speed
       level
       experience
+      tempExp
     }
-    alignment
-    background
-    class
-    race
+    equipment{
+      _id
+      type
+      name
+      definition
+    }
+    personality{
+      languages
+      proficiencies
+      traits
+      ideals
+      bonds
+      flaws
+    }
   }
 }
 `

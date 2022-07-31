@@ -12,7 +12,8 @@ const statSchema = new Schema({
     speed: Number,
     health: Number, 
     level: Number,
-    experience: Number
+    experience: Number,
+    tempExp: Number
 })
 
 const Stats = model('Stat', statSchema)

@@ -6,6 +6,7 @@ import {GiMuscleUp, GiBlackHandShield, GiShiningHeart, GiSpellBook, GiOpenBook, 
 
 function Stats({character}) {
   const stats = character.stats[0]
+  const [show, setShow] = useState(false)
   const [bonuses, setBonuses] = useState({
     athletics: 0,
     acrobatics: 0,
@@ -22,7 +23,7 @@ function Stats({character}) {
     medicine: 0,
     perception: 0,
     deception: 0,
-    initimidation: 0,
+    intimidation: 0,
     performance: 0,
     persuasion: 0,
   })
@@ -48,7 +49,7 @@ function Stats({character}) {
       medicine: (stats.wisdom * 2),
       perception: (stats.wisdom * 2),
       deception: (stats.charisma * .5),
-      initimidation: (stats.charisma * .5),
+      intimidation: (stats.charisma * .5),
       performance: (stats.charisma * .5),
       persuasion: (stats.charisma * .5),
     })
@@ -72,7 +73,7 @@ function Stats({character}) {
       medicine: (stats.wisdom * 2),
       perception: (stats.wisdom * 2),
       deception: (stats.charisma * .5),
-      initimidation: (stats.charisma * .5),
+      intimidation: (stats.charisma * .5),
       performance: (stats.charisma * .5),
       persuasion: (stats.charisma * .5),
     })
@@ -99,7 +100,7 @@ function Stats({character}) {
       medicine: (stats.wisdom * .5),
       perception: (stats.wisdom * .5),
       deception: (stats.charisma * .5),
-      initimidation: (stats.charisma * 2),
+      intimidation: (stats.charisma * 2),
       performance: (stats.charisma * 2),
       persuasion: (stats.charisma * 2),
     })
@@ -116,15 +117,15 @@ function Stats({character}) {
       history: (stats.intelligence * 2),
       investigation: (stats.intelligence * 2),
       nature: (stats.intelligence * .5),
-      religion: (stats.intelligence * 2),
+      religion: (stats.intelligence * .5),
       animal: (stats.wisdom * .5),
       insight: (stats.wisdom * .5),
-      medicine: (stats.wisdom * 2),
+      medicine: (stats.wisdom * .5),
       perception: (stats.wisdom * 2),
-      deception: (stats.charisma * .5),
-      initimidation: (stats.charisma * .5),
+      deception: (stats.charisma * 2),
+      intimidation: (stats.charisma * .5),
       performance: (stats.charisma * .5),
-      persuasion: (stats.charisma * .5),
+      persuasion: (stats.charisma * 2),
     })
   }
     if((character.class == "Druid") 
@@ -137,17 +138,17 @@ function Stats({character}) {
       sleight: (stats.dexterity * .5),
       sneak: (stats.dexterity * .5),
       survival: (stats.constitution * .5),
-      arcana: (stats.intelligence * 2),
+      arcana: (stats.intelligence * .5),
       history: (stats.intelligence * 2),
       investigation: (stats.intelligence * 2),
-      nature: (stats.intelligence * .5),
+      nature: (stats.intelligence * 2),
       religion: (stats.intelligence * 2),
-      animal: (stats.wisdom * .5),
+      animal: (stats.wisdom * 2),
       insight: (stats.wisdom * .5),
       medicine: (stats.wisdom * 2),
       perception: (stats.wisdom * 2),
       deception: (stats.charisma * .5),
-      initimidation: (stats.charisma * .5),
+      intimidation: (stats.charisma * .5),
       performance: (stats.charisma * .5),
       persuasion: (stats.charisma * .5),
     })
@@ -157,22 +158,22 @@ function Stats({character}) {
     || (character.class == "Reaper") 
     || (character.class == "Sniper")){
     setBonuses({
-      athletics: (stats.strength * .5),
-      acrobatics: (stats.dexterity * .5),
-      sleight: (stats.dexterity * .5),
-      sneak: (stats.dexterity * .5),
+      athletics: (stats.strength * 2),
+      acrobatics: (stats.dexterity * 2),
+      sleight: (stats.dexterity * 2),
+      sneak: (stats.dexterity * 2.2),
       survival: (stats.constitution * .5),
-      arcana: (stats.intelligence * 2),
-      history: (stats.intelligence * 2),
-      investigation: (stats.intelligence * 2),
+      arcana: (stats.intelligence * .5),
+      history: (stats.intelligence * .5),
+      investigation: (stats.intelligence * .5),
       nature: (stats.intelligence * .5),
       religion: (stats.intelligence * 2),
       animal: (stats.wisdom * .5),
       insight: (stats.wisdom * .5),
-      medicine: (stats.wisdom * 2),
-      perception: (stats.wisdom * 2),
-      deception: (stats.charisma * .5),
-      initimidation: (stats.charisma * .5),
+      medicine: (stats.wisdom * .5),
+      perception: (stats.wisdom * 2.2),
+      deception: (stats.charisma * 2.2),
+      intimidation: (stats.charisma * .5),
       performance: (stats.charisma * .5),
       persuasion: (stats.charisma * .5),
     })
@@ -182,8 +183,11 @@ function Stats({character}) {
     areBonused()
   }, [])
   return (
+    <div >
+      <button onClick={() => setShow(!show)} className='showBtn'>{show ? 'Hide Proficiencies' : 'Show Proficiencies'}</button>
+    {show ? 
     <div className='largeStats'>
-    <Tab.Container id="list-group-secondary" defaultActiveKey=''>
+    <Tab.Container id="list-group-secondary" defaultActiveKey='' >
     <ListGroup>
     <ListGroup.Item >Melee Proficiency Bonus {Math.floor((stats.strength + stats.dexterity) * .7)}{/*db stats */}</ListGroup.Item>
     <ListGroup.Item >Ranged Proficiency Bonus {Math.floor((stats.intelligence + stats.perception) * .7)}{/*db stats */}</ListGroup.Item>
@@ -203,38 +207,40 @@ function Stats({character}) {
     </Tab.Pane>
     <Tab.Pane eventKey='#Dexterity' className="popout">
       <p>Saving Throws</p> 
-      <p>Acrobatics: {Math.round(stats.dexterity * .5)}</p>
-      <p>Sleight of Hand: {Math.round(stats.dexterity * .7)}</p>
-      <p>Stealth: {Math.round(stats.dexterity * .9)}</p>
+      <p>Acrobatics: {Math.round(bonuses.acrobatics * .5)}</p>
+      <p>Sleight of Hand: {Math.round(bonuses.sleight * .7)}</p>
+      <p>Stealth: {Math.round(bonuses.sneak * .9)}</p>
     </Tab.Pane>
     <Tab.Pane eventKey='#Constitution' className="popout">
       <p>Saving Throws</p>
-      <p>Survival: {Math.round(stats.constitution * .6)}</p>
+      <p>Survival: {Math.round(bonuses.constitution * .6)}</p>
     </Tab.Pane>
     <Tab.Pane eventKey='#Intelligence' className="popout">
       <p>Saving Throws</p>
-      <p>Arcana: {Math.round(stats.intelligence * .7)}</p>
-      <p>History: {Math.round(stats.intelligence * .5)}</p>
-      <p>Investigation: {Math.round(stats.intelligence * .8)}</p>
-      <p>Nature: {Math.round(stats.intelligence * .4)}</p>
-      <p>Religion: {Math.round(stats.intelligence * .6)}</p>
+      <p>Arcana: {Math.round(bonuses.arcana * .7)}</p>
+      <p>History: {Math.round(bonuses.history * .5)}</p>
+      <p>Investigation: {Math.round(bonuses.investigation * .8)}</p>
+      <p>Nature: {Math.round(bonuses.nature * .4)}</p>
+      <p>Religion: {Math.round(bonuses.religion * .6)}</p>
     </Tab.Pane>
     <Tab.Pane eventKey='#Wisdom' className="popout">
       <p>Saving Throws</p>
-      <p>Animal Handling: {Math.round(stats.wisdom * .8)}</p>
-      <p>Insight: {Math.round(stats.wisdom * .6)}</p>
-      <p>Medicine: {Math.round(stats.wisdom * .7)}</p>
-      <p>Perception: {Math.round(stats.wisdom * .8)}</p>
+      <p>Animal Handling: {Math.round(bonuses.animal * .8)}</p>
+      <p>Insight: {Math.round(bonuses.insight * .6)}</p>
+      <p>Medicine: {Math.round(bonuses.medicine * .7)}</p>
+      <p>Perception: {Math.round(bonuses.perception * .8)}</p>
     </Tab.Pane>
     <Tab.Pane eventKey='#Charisma' className="popout">
       <p>Saving Throws</p>
-      <p>Deception: {Math.round(stats.charisma * .9)}</p>
-      <p>Intimidation: {Math.round(stats.charisma * .8)}</p>
-      <p>Performance: {Math.round(stats.charisma * .7)}</p>
-      <p>Persuasion: {Math.round(stats.charisma * .7)}</p>
+      <p>Deception: {Math.round(bonuses.deception * .9)}</p>
+      <p>Intimidation: {Math.round(bonuses.intimidation * .8)}</p>
+      <p>Performance: {Math.round(bonuses.performance * .7)}</p>
+      <p>Persuasion: {Math.round(bonuses.persuasion * .7)}</p>
     </Tab.Pane>
   </Tab.Content>
   </Tab.Container>
+  </div>
+  : ""}
   </div>
   )
 }

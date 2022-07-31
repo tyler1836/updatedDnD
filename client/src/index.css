@@ -1,47 +1,83 @@
-*{
+* {
   box-sizing: border-box;
 }
+/* b4c5e4 lightblue color for text? */
 body {
   margin: 0;
-  font-family: 'Grenze Gotisch', sans-serif!important;
+  font-family: 'Grenze Gotisch', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
-  color: grey;  
+  background-color: #330033!important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23404' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23505'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
+  /* background by SVGBackgrounds.com */
+  height: 100vh;
+  color: #d7cdcc!important;
 
 }
-html, body{
+html,
+body {
   min-height: 100%;
-  background-color: rgba(200, 200, 200, .3);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+    monospace;
 }
-a{
-  color: darkgray!important;
-  text-decoration: none!important;
+
+a {
+  color: darkgray !important;
+  text-decoration: none !important;
 }
-a:hover{
+
+a:hover {
   transform: scale(1.4);
 }
-input{
+
+button {
+  max-width: 50%;
+  align-self: center;
+}
+
+button:hover {
+  transform: scale(1.2);
+}
+
+input {
   border-radius: 9999em;
   text-align: center;
+  max-width: 50%;
+  align-self: center;
 }
-.character{
+
+.addTraits{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn{
+  margin-bottom: 3%;
+}
+
+.bag{
+  display: flex;
+  flex-direction: column;
+}
+
+.character {
   min-width: 100%;
 }
-.characterCreate{
+
+.characterCreate {
   font-family: 'Cinzel Decorative', cursive;
   text-align: center;
   margin: 10px 0;
 }
-.characterCreate button{
+
+.characterCreate button {
   margin-top: 10px;
 }
-.characterList{
+
+.characterList {
   display: flex;
   justify-content: space-between;
   border-bottom: solid black;
@@ -49,35 +85,61 @@ input{
   margin-bottom: 5px;
   padding: 5px;
 }
-.characterList:hover{
-  background-color: beige;
+
+.characterList:hover {
+  background-color: #5f7470;
 }
-.hardStat{
+
+.characterName:hover {
+  transform: scale(1.8) translate(25%, 0);
+  cursor: pointer;
+}
+
+.hardStat {
   display: flex;
 }
-.hardStats{
+
+.hardStats {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px;
+  padding: 1.2rem;
+  text-align: center;
+  align-self: center;
 }
-.home img{
+
+/* .home img {
   object-fit: cover;
+} */
+
+.inside {
+  font-family: 'Cinzel Decorative';
 }
-.inside{
-  font-family: 'Cinzel';
-}
-.jobs{
+
+.jobs {
   display: flex;
   justify-content: space-between;
 }
-.list-group-item.active{
-  background-color: white!important;
+
+.list-group-item{
+  background-color: rgba(0, 0, 0, 0)!important;
+  color: white!important;
+  text-align: center;
 }
-.largeStats{
+
+.list-group-item.active {
+  background-color: rgba(0, 0, 0, 0)!important;
+  border: solid white!important;
+  transform: scale(.7);
+}
+
+.largeStats {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
-.loggedIn{
+
+.loggedIn {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -85,72 +147,115 @@ input{
   height: 100vh;
   text-align: center;
 }
-.progress{
+
+.progress {
   margin: 10px 0;
 }
-.profile{
+
+.profile {
   font-family: 'Grenze Gotisch', cursive, sans-serif;
 }
-.popout{
+
+.popout {
   margin-right: auto;
-  background-color: white;
   padding: 10px;
   box-shadow: 1px 2px 2px black;
   border-radius: 20%;
 }
-.getProfile{
+
+.getProfile {
   max-width: 40%;
   background-color: darkgray;
   padding: 5px 30px;
   border-radius: 10px;
   max-height: fit-content;
 }
-.stats{
+
+.permanentAlignments{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.showBtn{
+    background: rgb(70, 3, 70);
+    border: none!important;
+    color: rgb(201, 8, 201);
+    border-radius: 25px;
+    margin: 3%;
+    max-width: fit-content;
+}
+
+.stats {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 15px;
 }
-.welcome{
+
+.topCharSheet{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.welcome {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-.welcome p{
+
+.welcome p {
   line-height: 2rem;
   text-align: center;
 }
-@media screen and (max-width: 960px){
-  .banner{
+
+@media screen and (max-width: 960px) {
+  .banner {
     max-width: 0%;
   }
-  .loggedIn{
+
+  .loggedIn {
     display: inline-block;
     height: fit-content;
   }
-  .getProfile{
+
+  .getProfile {
     max-width: fit-content;
     margin: 30px;
   }
-  .stats{
+
+  .stats {
     justify-content: space-evenly;
     padding: 0;
   }
 }
-@media screen and (max-width: 500px){
-  .banner{
+
+@media screen and (max-width: 500px) {
+  .banner {
     max-width: 0%;
   }
-  .loggedIn{
+
+  .loggedIn {
     display: inline-block;
     height: fit-content;
   }
-  .getProfile{
+
+  .getProfile {
     max-width: fit-content;
     margin: 30px;
   }
-  .stats{
+
+  .permanentAlignments{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stats {
     justify-content: space-evenly;
     padding: 0;
   }
