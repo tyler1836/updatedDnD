@@ -84,7 +84,7 @@ function Profile() {
           return (
             <div className="characterList" id={character._id} key={character._id} >
               <div>
-                <h5 onClick={() => window.location.assign(`/loading/`)} className='characterName'>{character.name}</h5>
+                <h5 onClick={() => window.location.assign(`/loading`)} className='characterName'>{character.name}</h5>
               </div>
               <div>
                 <h6>Race: {character.race}</h6>
