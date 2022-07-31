@@ -19,7 +19,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 const httpLink = createHttpLink({
-  uri: 'https://dndserverside.herokuapp.com/graphql'
+  uri: '/graphql'
 })
 const client = new ApolloClient({
   //concat with request link to graphql

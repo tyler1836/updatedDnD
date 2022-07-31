@@ -21,10 +21,7 @@ function Profile() {
     wisdom: "",
     charisma: "",
     perception: "",
-    health: "",
-    level: 1,
-    speed: 15,
-
+    health: ""
   })
   const { loading, data } = useQuery(QUERY_ME)
   const [deleteCharacter, { error }] = useMutation(DELETE_CHARACTER)
@@ -45,7 +42,21 @@ function Profile() {
     console.log({...createStats})
     try{
       await addStats({
-        variables: {...createStats}
+        variables: {
+          characterId: createStats.characterId,
+          strength: createStats.strength,
+          dexterity: createStats.dexterity,
+          constitution: createStats.constitution,
+          intelligence: createStats.intelligence,
+          wisdom: createStats.wisdom,
+          charisma: createStats.charisma,
+          perception: createStats.perception,
+          health: createStats.health,
+          level: 1,
+          speed: 15,
+          experience: 100,
+          tempExp: 0
+        }
       })
       setCreateStats({
         characterId: "",
@@ -56,9 +67,7 @@ function Profile() {
         wisdom: "",
         charisma: "",
         perception: "",
-        health: "",
-        level: 1,
-        speed: '15',
+        health: ""
       })
       window.location.reload()
     }catch(e){
@@ -69,7 +78,7 @@ function Profile() {
     console.log(args)
     const confirmation = confirm('This is permanent. Are you sure?')
     confirmation ?
-      await deleteCharacter({ variables: { characterId: args } }) && window.location.assign('/profile') : "";
+      await deleteCharacter({ variables: { characterId: args } }) && window.location.reload() : "";
   }
   if (loading) {
     return <div>Loading...</div>
@@ -84,7 +93,7 @@ function Profile() {
           return (
             <div className="characterList" id={character._id} key={character._id} >
               <div>
-                <h5 onClick={() => window.location.assign(`https://dungeons-and-disasters.netlify.app/loading/${character._id}`)} className='characterName'>{character.name}</h5>
+                <h5 className='characterName'><Link to={`/loading/${character._id}`}>{character.name}</Link></h5>
               </div>
               <div>
                 <h6>Race: {character.race}</h6>
@@ -97,7 +106,8 @@ function Profile() {
                   <button onClick={() => {
                     setShowStats(!showStats),
                     setCharacterIndex(index),
-                    setId(character._id)
+                    setId(character._id),
+                    setCreateStats({characterId: character._id})
                   }}>Add Stats</button> : <h6>Level: {character.stats[0].level}</h6>
                 }
                 <h6><FaRegTrashAlt style={{color:'red'}} onClick={() => destroyChar(character._id)} /></h6>
@@ -113,7 +123,7 @@ function Profile() {
                     <input type="text" placeholder={'perception roll 2d6'} name='perception' value={createStats.perception} onChange={handleChange} />
                     <input type="text" placeholder={'health roll 2d6'} name='health' value={createStats.health} onChange={handleChange} />
                     <button onClick={() => {
-                      setCreateStats({...createStats, characterId: character._id})
+                      setCreateStats({...createStats})
                       handleAddStats()
                       }}>Add</button>
                 </div> : ""}

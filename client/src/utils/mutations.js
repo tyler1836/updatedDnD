@@ -50,8 +50,8 @@ mutation($characterId: ID!, $class: String!) {
 `
 
 export const ADD_STATS = gql`
-mutation($characterId: ID!, $strength: Int, $dexterity: Int, $constitution: Int, $intelligence: Int, $wisdom: Int, $charisma: Int, $perception: Int, $health: Int, $level: Int, $speed: Int, ) {
-  addStats(characterId: $characterId, strength: $strength, dexterity: $dexterity, constitution: $constitution, intelligence: $intelligence, wisdom: $wisdom, charisma: $charisma, perception: $perception, health: $health, level: $level, speed: $speed) {
+mutation($characterId: ID!, $strength: Int, $dexterity: Int, $constitution: Int, $intelligence: Int, $wisdom: Int, $charisma: Int, $perception: Int, $health: Int, $level: Int, $speed: Int, $experience: Int, $tempExp: Int ) {
+  addStats(characterId: $characterId, strength: $strength, dexterity: $dexterity, constitution: $constitution, intelligence: $intelligence, wisdom: $wisdom, charisma: $charisma, perception: $perception, health: $health, level: $level, speed: $speed, experience: $experience, tempExp: $tempExp) {
     strength
   }
 }
