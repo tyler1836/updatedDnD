@@ -1,4 +1,0 @@
-[[redirects]]
-from = "loading/:id"
-to = "/index.html"
-status = 301

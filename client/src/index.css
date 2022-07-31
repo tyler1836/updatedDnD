@@ -34,7 +34,7 @@ a:hover {
 }
 
 button {
-  max-width: fit-content;
+  max-width: 50%;
   align-self: center;
 }
 
@@ -146,6 +146,10 @@ input {
   background-color: lightgray;
   height: 100vh;
   text-align: center;
+}
+
+.loggedIn input{
+  max-width: 100%;
 }
 
 .progress {

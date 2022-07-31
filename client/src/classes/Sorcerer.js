@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { RedMage, sorcerer, WhiteMage, BlackMage } from "../skills/skills.js"
+import { sorcererLevelUp, whitemageLevelUp, blackmageLevelUp, redmageLevelUp } from "../skills/levelUp.js";
 import { useMutation } from "@apollo/client";
 import { LEVEL_UP } from '../utils/mutations'
 import { useParams } from "react-router-dom";
@@ -31,30 +32,10 @@ function Sorcerer({ character }) {
   const [percent, setPercent] = useState("")
   const [pickJob, setPickJob] = useState(false)
   useEffect(() => {
-    if (window.localStorage.key('maxExp')) {
-      let getMaxExp = window.localStorage.getItem('maxExp')
-      setMaxXp(Number(getMaxExp))
-    }
-    if (!window.localStorage.getItem('maxExp')) {
-      let randomXP = maxXp + Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
-      setMaxXp(randomXP)
-      console.log('hello')
-      window.localStorage.setItem('maxExp', randomXP)
-    }
-    if (window.localStorage.key('tempExp')) {
-      let getExp = window.localStorage.getItem('tempExp')
-      setExp(getExp)
-      if (!window.localStorage.getItem('maxExp')) {
-        let percentage = ((Number(getExp) / randomXP) * 100)
-        setPercent(percentage)
-      } else {
-        let getMaxExp = window.localStorage.getItem('maxExp')
-        let percentage = ((Number(getExp) / getMaxExp) * 100)
-        console.log(`${maxXp} & ${percentage} & ${getExp}`)
-        setPercent(percentage)
-      }
-    }
-  }, [newLevel])
+    let percentage = (exp / maxXp) * 100
+    setPercent(percentage)
+    
+ }, [])
   const levelUp = () => {
     let levels = newLevel + 1
     if (levels == 30) {
@@ -63,24 +44,40 @@ function Sorcerer({ character }) {
     setNewLevel(levels)
     setExp(0)
     setPercent(0)
-    window.localStorage.removeItem('tempExp')
-    window.localStorage.removeItem('maxExp')
-    if (character.class == "Pugilist") {
-      pugilistLevelUp({ baseStats, mutateChar, characterId, levels, maxXp })
-    } if (character.class == "Monk") {
-      monkLevelUp()
+    let randomXP = maxXp + Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
+    setMaxXp(randomXP)
+    if (character.class == "Sorcerer") {
+      sorcererLevelUp({ baseStats, mutateChar, characterId, levels, randomXP })
+    } if (character.class == "White Mage") {
+      whitemageLevelUp({ baseStats, mutateChar, characterId, levels, randomXP })
+    } if (character.class == "Black Mage") {
+      blackmageLevelUp({ baseStats, mutateChar, characterId, levels, randomXP })
     } else {
-      fighterLevelUp()
+      redmageLevelUp({ baseStats, mutateChar, characterId, levels, randomXP })
     }
   }
-  const addXp = (xp) => {
+  const addXp = async (xp) => {
     let percentage = Number(percent) + ((Number(xp) / maxXp) * 100)
     setPercent(percentage)
-    setExp(Number(exp) + Number(xp))
-    let getExp = window.localStorage.getItem('tempExp')
-    let temporary = (Number(tempXp) + Number(getExp))
-    window.localStorage.setItem('tempExp', temporary)
+    let sessionXp = (Number(exp) + Number(xp))
+    setExp(sessionXp)
     setTempXp("")
+    await mutateChar({variables: {
+      characterId: characterId,
+      statId: baseStats._id,
+      charisma: baseStats.charisma,
+      strength: baseStats.strength,
+      dexterity: baseStats.dexterity,
+      intelligence: baseStats.intelligence,
+      wisdom: baseStats.wisdom,
+      level: baseStats.level,
+      perception: baseStats.perception,
+      constitution: baseStats.constitution,
+      speed: baseStats.speed,
+      health: baseStats.health,
+      experience: maxXp,
+      tempExp: sessionXp
+    }})
   }
   return (
     <div className='inside'>
@@ -119,7 +116,7 @@ function Sorcerer({ character }) {
             <Button variant='danger' onClick={() => { setShow(!show), setJobName('Red Mage'), setJob(RedMage) }} disabled={(jobName == 'Red Mage')}>Choose Red Mage</Button>
           </div>
           : ''}
-        <Bag
+        <Bag character={character}
         />
       </div>
     </div>
