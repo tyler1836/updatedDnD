@@ -5,10 +5,12 @@ import Stack from 'react-bootstrap/Stack';
 import { Gi3DHammer, GiLeatherBoot, GiRun, GiShield, GiAbstract008 } from 'react-icons/gi'
 
 
-function Hits() {
+function Hits({character}) {
+    const stats = character.stats[0]
+    const [equip, setEquip] = useState({armor: 3, legs: 2, boots: 5})
     const [hp, setHp] = useState(100)
     const [damage, setDamage] = useState("")
-    let maxhp = 1600
+    let maxhp = stats.health
     const [tempDamage, setTempDamage] = useState(maxhp)
     const [tempHp, setTempHp] = useState("")
     //max hp from database set it to a variable
@@ -44,7 +46,7 @@ function Hits() {
                         <GiShield style={{ fontSize: 60, color: "rgba(0,255,255,.4)" }} />
                     </div>
                     <div>
-                        <p>Based on Equip + strength</p>
+                        <p>{stats.strength + equip.armor + equip.legs}</p>
                     </div>
                 </div>
                 <div className="hardStats">
@@ -55,17 +57,18 @@ function Hits() {
                         <GiAbstract008 style={{ fontSize: 60, color: "purple" }} />
                     </div>
                     <div>
-                        <p>Based on Equip + strength i</p>
+                        <p>{stats.speed - (equip.armor + equip.legs)}</p>
                     </div></div>
                 <div className="hardStats">
                     <div>
-                        <p>Speed/Movement</p>
+                        <p>Speed /
+                        Movement</p>
                     </div>
                     <div>
                         <GiLeatherBoot style={{ fontSize: 60, color: "brown" }} />
                     </div>
                     <div>
-                        <p>Based on Equip + strength</p>
+                        <p>{stats.speed + equip.boots}</p>
                     </div></div>
             </div>
             <div>

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -27,12 +27,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-import Header from './classes/Header'
-import Home from './classes/Home'
-import NotFound from './classes/NotFound'
-import Arcanist from './classes/Arcanist'
-import Pugilist from './classes/Pugilist'
-import Signup from './classes/Signup';
+import Header from './userPages/Header'
+import Home from './userPages/Home'
+import NotFound from './userPages/NotFound'
+import Signup from './userPages/Signup';
+import Profile from './userPages/Profile';
+import CreateCharacter from './userPages/CreateCharacter';
+import Loading from './userPages/Loading';
 /* 
 updates:
   need database
@@ -46,11 +47,15 @@ function App() {
       <Router>
         <Header />
         <div>
-          <Routes>
-            <Route exact path='/' element={<Home />} />
-            <Route exact path="/login" element={<Signup />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path="/login" component={Signup} />
+            <Route exact path='/profile' component={Profile}/>
+            <Route exact path='/create' component={CreateCharacter}/>
+            <Route exact path='/loading/:id' component={Loading }/>
+
+            <Route path='*' component={NotFound} />
+          </Switch>
         </div>
       </Router>
     </ApolloProvider>

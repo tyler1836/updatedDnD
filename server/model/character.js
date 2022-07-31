@@ -24,6 +24,7 @@ const characterSchema = new Schema({
     race: String,
     alignment: String,
     background: String,
+    class: String,
     createdAt: String,
     gm: 
     [

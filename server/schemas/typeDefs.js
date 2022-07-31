@@ -9,7 +9,7 @@ type Character {
   personality: [Personality]
   equipment: [Equipment]
   # 
-  experience: Int
+  class: String
   race: String
   alignment: String
   background: String
@@ -17,8 +17,6 @@ type Character {
 }
 type Stat{
     _id: ID
-    proficiency: Int 
-    inspiration: Int 
     strength: Int
     dexterity: Int
     constitution: Int
@@ -26,11 +24,11 @@ type Stat{
     wisdom: Int
     charisma: Int
     perception: Int
-    armor: Int 
-    initiative: Int 
     speed: Int
     health: Int 
     level: Int 
+    experience: Int
+    tempExp: Int
 }
 type Personality{
     _id: ID
@@ -43,9 +41,9 @@ type Personality{
 }
 type Equipment{
     _id: ID
-    name: String!
-    type: String!
-    definition: String!
+    name: String
+    type: String
+    definition: String
 }
 type User {
   _id: ID
@@ -55,6 +53,7 @@ type User {
   createdAt: String
   isGm: Boolean
   characters: [Character]
+  gamemasters: [User]
 }
 type Gamemaster{
     _id: ID
@@ -66,6 +65,7 @@ type Auth{
 }
 type Query {
   me: User
+  users: [User]
   characters: [Character]
   character(_id: ID!): Character 
   gamemasters: [Gamemaster]
@@ -83,18 +83,24 @@ type Mutation {
     username: String!, 
     email: String!, 
     password: String! 
-    isGm: Boolean
+    isGm: Boolean!
     ): Auth
   addCharacter(
     name: String!,
     race: String!,
-    alignment: String!, 
-    background: String
+    alignment: String!,
+    class: String! 
+    background: String!
     ): Character
+  deleteCharacter(
+    characterId: ID!
+  ): Character
+  updateClass(
+    characterId: ID!
+    class: String!
+  ): Character
   addStats(
     characterId: ID!
-    proficiency: Int
-    inspiration: Int
     strength: Int
     dexterity: Int
     constitution: Int
@@ -102,11 +108,10 @@ type Mutation {
     wisdom: Int
     charisma: Int
     perception: Int
-    armor: Int 
-    initiative: Int 
     speed: Int
     health: Int 
     level: Int
+    experience: Int
     ): Stat
   addPersonality(
     characterId: ID!
@@ -123,4 +128,24 @@ type Mutation {
     type: String!
     definition: String!
   ): Equipment
+  deleteEquipment(
+    characterId: ID!
+    equipmentId: ID!
+  ): Equipment
+  levelUp(
+    characterId: ID!
+    statId: ID!
+    strength: Int
+    dexterity: Int
+    constitution: Int
+    intelligence: Int
+    wisdom: Int
+    charisma: Int
+    perception: Int
+    health: Int 
+    level: Int
+    experience: Int
+    speed: Int
+    tempExp: Int
+  ): Stat
 }`
