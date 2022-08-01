@@ -99,7 +99,23 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         deleteCharacter: async (parent, { characterId }) => {
-            const char = await Character.findByIdAndDelete(characterId)
+            const cascadeChar = await Character.findById(characterId)
+            /* Pull out associated ids from character to have auto delete dependencies on character delete
+            run through an if statement in case there are no stats/equipment/personality 
+            allows function to be be carried out if something hasn't been added yet */
+            const assocStats = cascadeChar.stats[0]._id
+            const assocEquip = cascadeChar.equipment[0]._id
+            const assocPersonality = cascadeChar.personality[0]._id
+            if(assocStats){
+                await Stats.findByIdAndRemove(assocStats)
+            }
+            if(assocEquip){
+                await Stats.findByIdAndRemove(assocEquip)
+            }
+            if(assocPersonality){
+                await Stats.findByIdAndRemove(assocPersonality)
+            }
+            const char = await Character.findByIdAndRemove(characterId)
             return char
         },
         updateClass: async (parent, args) => {
@@ -145,7 +161,7 @@ const resolvers = {
                 { $push: { stats: stat } },
                 { new: true }
             )
-            console.log('not working')
+            console.log(stat)
             return character
 
         },
