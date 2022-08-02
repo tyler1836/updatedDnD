@@ -26,7 +26,7 @@ function Archer({ character }) {
   const [combat, setCombat] = useState(false)
   const [newLevel, setNewLevel] = useState(level)
   const [maxXp, setMaxXp] = useState(baseStats.experience)
-  const [exp, setExp] = useState("")
+  const [exp, setExp] = useState(baseStats.tempExp)
   const [tempXp, setTempXp] = useState("")
   const [percent, setPercent] = useState("")
   const [pickJob, setPickJob] = useState(false)
@@ -40,7 +40,7 @@ function Archer({ character }) {
    if (levels == 30) {
      setPickJob(true)
    }
-   let randomXP = maxXp + Math.floor(Math.random() * (newLevel + 99)) + (newLevel * 100)
+   let randomXP = maxXp + Math.floor(Math.random() * (newLevel + 47)) + (newLevel * 100)
    setMaxXp(randomXP)
    setNewLevel(levels)
    setExp(0)
@@ -52,6 +52,7 @@ function Archer({ character }) {
    }else{
      sniperLevelUp({ baseStats, mutateChar, characterId, levels, maxXp })
    }
+   window.location.reload()
  }
  const addXp = async (xp) => {
    let percentage = Number(percent) + ((Number(xp) / maxXp) * 100)
@@ -113,7 +114,7 @@ function Archer({ character }) {
             <Button variant='danger' onClick={() => { setShow(!show), setJobName('Sniper'), setJob(Sniper) }} disabled={(jobName == 'Sniper')}>Choose Sniper</Button>
           </div>
           : ''}
-        <Bag
+        <Bag character={character}
         />
       </div>
     </div>

@@ -49,6 +49,7 @@ function Bag(props) {
   return (
     <div className='bag'>
         <button className='showBtn' onClick={() => setShowBag(!showBag)}>Show Items</button>
+        <button className='showBtn' onClick={() => setShow(!show)}>Add Items</button>
       {showBag ?
       <Table bordered hover variant="light">
         <thead>
@@ -56,6 +57,7 @@ function Bag(props) {
             <th>Equipment</th>
             <th>Type</th>
             <th>Description</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -72,7 +74,7 @@ function Bag(props) {
         </tbody>
       </Table>
       : ""}
-      <button className='showBtn' onClick={() => setShow(!show)}>Add Items</button>
+      
       {show ? 
       <Stack direction='vertical' gap={3}>
         <input type="text" name='name' value={bag.name} onChange={handleChange} placeholder="Item Name" />

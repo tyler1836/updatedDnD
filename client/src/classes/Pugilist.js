@@ -28,7 +28,7 @@ function Pugilist({ character }) {
   const [combat, setCombat] = useState(false)
   const [newLevel, setNewLevel] = useState(level)
   const [maxXp, setMaxXp] = useState(baseStats.experience)
-  const [exp, setExp] = useState("")
+  const [exp, setExp] = useState(baseStats.tempExp)
   const [tempXp, setTempXp] = useState("")
   const [percent, setPercent] = useState("")
   const [pickJob, setPickJob] = useState(false)

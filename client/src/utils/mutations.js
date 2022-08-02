@@ -64,6 +64,12 @@ mutation($characterId: ID!, $statId: ID!, $strength: Int, $dexterity: Int, $inte
   }
 }
 `
+export const ADD_PERSONALITY = gql`
+mutation($characterId: ID!, $traits: String, $ideals: String, $bonds: String, $flaws: String, $proficiencies: String, $languages: String) {
+  addPersonality(characterId: $characterId, traits: $traits, ideals: $ideals, bonds: $bonds, flaws: $flaws, proficiencies: $proficiencies, languages: $languages) {
+    traits
+  }
+}`
 
 export const ADD_EQUIPMENT = gql`
 mutation($characterId: ID!, $name: String!, $type: String!, $definition: String!) {
