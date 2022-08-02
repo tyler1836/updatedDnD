@@ -102,18 +102,23 @@ const resolvers = {
             const cascadeChar = await Character.findById(characterId)
             /* Pull out associated ids from character to have auto delete dependencies on character delete
             run through an if statement in case there are no stats/equipment/personality 
-            allows function to be be carried out if something hasn't been added yet */
+            allows function to be be carried out if something hasn't been added yet 
+            .remove('stats').remove('personality').remove('equipment')
+            */
             const assocStats = cascadeChar.stats[0]._id
-            const assocEquip = cascadeChar.equipment[0]._id
+            const assocEquip = cascadeChar.equipment[0]
             const assocPersonality = cascadeChar.personality[0]._id
             if(assocStats){
-                await Stats.findByIdAndRemove(assocStats)
+             
+                await Stats.findByIdAndDelete(assocStats)
             }
             if(assocEquip){
-                await Stats.findByIdAndRemove(assocEquip)
+               
+                await Equipment.findByIdAndDelete(assocEquip)
             }
             if(assocPersonality){
-                await Stats.findByIdAndRemove(assocPersonality)
+          
+                await Personality.findByIdAndDelete(assocPersonality)
             }
             const char = await Character.findByIdAndRemove(characterId)
             return char
@@ -189,6 +194,38 @@ const resolvers = {
                 { new: true }
             )
             return char
+        },
+        updatePersonality: async (parent, {
+            characterId,
+            personalityId,
+            traits,
+            ideals,
+            bonds,
+            flaws,
+            proficiencies,
+            languages
+
+        }) => {
+            const char = await Character.findById(characterId)
+            console.log(char)
+            const updatePersonality = await Personality.findByIdAndUpdate(
+                {_id: personalityId},
+                {
+                 traits: traits,
+                 ideals: ideals,
+                 bonds: bonds,
+                 flaws: flaws,
+                 proficiencies: proficiencies,
+                 languages: languages
+                },
+                {new: true}
+            )
+            const updateCharacterPersonality = await Character(
+                {_id: characterId},
+                {$pull: {updatePersonality}},
+                {$push: {personality: updatePersonality}},
+                {new: true}
+                )
         },
         addEquipment: async (parent, {
             characterId,
