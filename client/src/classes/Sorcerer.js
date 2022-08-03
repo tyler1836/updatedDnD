@@ -107,7 +107,7 @@ function Sorcerer({ character }) {
           jobName={jobName}
           reset={() => { setJobName('Sorcerer'), setJob(sorcerer) }}
           selected={() => setPickJob(false)}
-          info={(jobName == 'White Mage') ? "healer" : (jobName == "Black Mage") ? "Damage" : "Utility"}
+          info={(jobName == 'White Mage') ? "You have found an affinity to white magicks. Pursuing a life in this blessing you slowly master white magicks to not only cure the wounds of allies but deal heavy damage to creatures sodden in dark magicks. Specializes in healing" : (jobName == "Black Mage") ? "Opposite of White Mages you found an affinity to dark/black magicks. This dangerous path can lead to your destruction but if you can learn to master it you will be more powerful than you can imagine. Specializes in damage dealing." : "Finding neither a strong affinity towards neither white magicks nor black magicks you can walk the balance between both of them. Specializes in utility."}
         />
         {(pickJob) ?
           <div className='jobs'>

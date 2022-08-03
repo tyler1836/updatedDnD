@@ -107,7 +107,7 @@ function Pugilist({ character }) {
           jobName={jobName}
           reset={() => { setJobName('Pugilist'), setJob(pugilist) }}
           selected={() => setPickJob(false)}
-          info={(jobName == 'Monk') ? "Healing" : "Damage"}
+          info={(jobName == 'Monk') ? "Fighting has enlightened you. However you now want to seek more mind enlightenment and feel as though fist hitting flesh has taken you as far as you can go. Seeing that you retreat to the Ra'kskou Temple to learn from the monks. After training with them you can now add your new found enlightenment to battle. To protect those not as strong as you. Specializes in damage." : "Nothing excites you more than feeling your fists strike something. All you can think about is getting stronger and fighting stronger foes. You slightly lose a part of yourself as you become consumed with the thrill of the fight. Specializes in damage."}
         />
         {(pickJob) ?
           <div className='jobs'>

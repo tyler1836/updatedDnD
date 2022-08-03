@@ -65,7 +65,7 @@ function Loading() {
                 return <Soldier character={character} />
             case "Dark Knight":
                 return <Soldier character={character} />
-            case "Theif":
+            case "Thief":
                 return <Thief character={character} />
             case "Ninja":
                 return <Thief character={character} />

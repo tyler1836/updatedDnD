@@ -17,6 +17,7 @@ import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
 function Thief({ character }) {
+  
   const baseStats = character.stats[0]
   const { id: characterId } = useParams()
   const [mutateChar, { error: stat }] = useMutation(LEVEL_UP)
@@ -106,12 +107,12 @@ function Thief({ character }) {
           jobName={jobName}
           reset={() => { setJobName('Thief'), setJob(Thief) }}
           selected={() => setPickJob(false)}
-          info={(jobName == 'Ninja') ? "Damage" : "Damage"}
+          info={(jobName == 'Ninja') ? "After years of petty theft and sticking to the shadows you found yourself stagnating. Upon returning to your abode one night you spotted another being in the shadows. After trailing them for some time you find yourself surrounded by the Anbu Guild. You decide to trade sparing your life by devoting yourself to their ninja creed. Specializes in utility and damage dealing" : "You lose yourself after spending years in the shadow. At your lowest point death himself shows himself to you. Making a pact with death you gain otherworldy powers but owe your soul to death at the end of your life. Specializes in damage dealing."}
         />
         {(pickJob) ?
           <div className='jobs'>
             <Button variant='light' onClick={() => { setShow(!show), setJobName('Ninja'), setJob(Ninja) }} disabled={(jobName == 'Ninja')}>Choose Ninja</Button>
-            <Button variant='dark' onClick={() => { setShow(!show), setJobName('Reaper'), setJob(BlackMage) }} disabled={(jobName == 'Reaper')}>Choose Reaper</Button>
+            <Button variant='dark' onClick={() => { setShow(!show), setJobName('Reaper'), setJob(Reaper) }} disabled={(jobName == 'Reaper')}>Choose Reaper</Button>
           </div>
           : ''}
         <Bag character={character}
