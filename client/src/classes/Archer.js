@@ -106,7 +106,7 @@ function Archer({ character }) {
           jobName={jobName}
           reset={() => { setJobName('Archer'), setJob(Archer) }}
           selected={() => setPickJob(false)}
-          info={(jobName == 'Bard') ? "Utility" : "Damage"}
+          info={(jobName == 'Bard') ? "To pass time in the forest and towns you visit you picked up learning an instrument. After practicing from some time you have gotten quite good at it and can inspire and dissuade people with your songs. Specializes in utility." : "You've learned to shoot arrows with extreme precision. Because of this you tend to stay hidden in high places and support from afar. Specializes in damage."}
         />
         {(pickJob) ?
           <div className='jobs'>

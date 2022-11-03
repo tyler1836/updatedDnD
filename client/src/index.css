@@ -113,10 +113,16 @@ input {
   align-self: center;
 }
 
-/* .home img {
-  object-fit: cover;
-} */
+.home {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Genze Gotisch", cursive;
+}
 
+.home p{
+  font-size: 1.3rem;
+}
 .inside {
   font-family: 'Cinzel Decorative', cursive;
 }

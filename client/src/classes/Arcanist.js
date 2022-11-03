@@ -105,7 +105,7 @@ function Arcanist({ character }) {
           jobName={jobName}
           reset={() => { setJobName('Arcanist'), setJob(arcanist) }}
           selected={() => setPickJob(false)}
-          info={(jobName == 'Scholar') ? "Healing" : "Damage"}
+          info={(jobName == 'Scholar') ? "You have decided to partner with the good energies in the fey. The increased studying and spending time in the holy parts of the fey has transformed your fey creature to that of a more gentle nature. Specializes in shields and healing" : "The opposite of Scholars these arcanists go to understand the dark energy surrounding the fey. Your intellect and courage protect you from corruption your fey spirit isn't so lucky. It transforms into a creature of darkness but is still loyal to you and will die for you. Specializes in damage dealing"}
         />
         {(pickJob) ?
           <div className='jobs'>

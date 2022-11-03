@@ -107,7 +107,7 @@ function Nomad({ character }) {
           jobName={jobName}
           reset={() => { setJobName('Nomad'), setJob(Nomad) }}
           selected={() => setPickJob(false)}
-          info={(jobName == 'Druid') ? "Damage" : (jobName == "Beast Master") ? "Utility" : "Damage"}
+          info={(jobName == 'Druid') ? "All those years spent in the wilds you find harmony with the wilds, and wild animals. The spirits of fallen wild animals come to your aid and you are able to transform yourself into these spirits. Specializes in damage." : (jobName == "Beast Master") ? "You have befriended many animals on your journeys throughout the lands. As well as that you have learned of an acient magick to summon any of you befriended animals to help you in battle. Specializes in utility." : "Nature has become your greates ally. You command with force the elements of the world. Wreaking havoc on the battlefield. Specializes in damage."}
         />
         {(pickJob) ?
           <div className='jobs'>
