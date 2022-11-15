@@ -19,10 +19,11 @@ const resolvers = {
             if (context.user) {
                 const userData = User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    //multiple populates second populate pertain to first populates model
+                    //in multiple populate second populate pertain to first populates model
                     .populate({
                         path: 'characters',
                         model: 'Character',
+                        // populate from character model use character model info
                         populate: [
                             {
                                 path: 'stats',
@@ -83,6 +84,15 @@ const resolvers = {
 
             const token = signToken(user)
             return { token, user }
+        },
+        forgotPassword: async (parent, {email}) => {
+            const user = await User.findOne({email})
+
+            if(!user){
+                throw new AuthenticationError(
+                    "No user found with this email"
+                )
+            }
         },
         addCharacter: async (parent, args, context) => {
             console.log(args)

@@ -152,9 +152,10 @@ input {
 
 .loggedIn {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background-color: lightgray;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   height: 100vh;
   text-align: center;
 }
@@ -179,11 +180,12 @@ input {
 }
 
 .getProfile {
-  max-width: 40%;
   background-color: darkgray;
-  padding: 5px 30px;
+  padding: 3.2rem;
   border-radius: 10px;
   max-height: fit-content;
+  box-shadow: 0 0 8rem cyan;
+  text-shadow: 0 0 3px black;
 }
 
 .permanentAlignments{
@@ -244,10 +246,6 @@ input {
     max-width: 0%;
   }
 
-  .loggedIn {
-    display: inline-block;
-    height: fit-content;
-  }
 
   .getProfile {
     max-width: fit-content;
@@ -265,10 +263,7 @@ input {
     max-width: 0%;
   }
 
-  .loggedIn {
-    display: inline-block;
-    height: fit-content;
-  }
+  
 
   .getProfile {
     max-width: fit-content;
