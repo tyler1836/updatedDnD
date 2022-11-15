@@ -75,7 +75,7 @@ function Signup() {
         <h3>Login</h3>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="Text" placeholder="Enter username" name='email' value={login.email} onChange={loginChange}/>
+          <Form.Control type="Text" placeholder="Enter email" name='email' value={login.email} onChange={loginChange}/>
         </Form.Group>
         
         <Form.Group className="mb-3" controlId="formBasicPassword">
